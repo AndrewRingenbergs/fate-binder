@@ -1,0 +1,19 @@
+{
+  "installedESLint": true,
+  "extends": [
+    "airbnb", "plugin:react/recommended"
+  ],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "indent": [1, 2],
+    "react/prefer-stateless-function": 0
+  }
+}
+

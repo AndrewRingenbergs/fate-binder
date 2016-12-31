@@ -12,151 +12,166 @@ const _ = require('lodash');
 
 // -------------- building ---------------
 exports.htmlTemplate = function(options) {
-	let pluginOptions = {
-		title: options.title || 'New App',
+  let pluginOptions = {
+    title: options.title || 'New App',
     template: HtmlWebpackTemplate,
-		inject: false,
-		appMountId: 'root',
-	};
+    inject: false,
+    appMountId: 'root',
+  };
 
-	if(options.devServer) {
-		pluginOptions.devServer = options.devServer
-	}
+  if(options.devServer) {
+    pluginOptions.devServer = options.devServer
+  }
 
-	return {
-		plugins: [
-			new HTMLWebpackPlugin(pluginOptions)
-		]
-	}
+  return {
+    plugins: [
+      new HTMLWebpackPlugin(pluginOptions)
+    ]
+  }
 }
 
 exports.setupBabel = function(paths) {
-	return {
-		module: {
-			rules: [{
-				test: /\.(js|jsx)$/,
-				use: 'babel-loader',
-				include: paths,
-			}]
-		}
-	}
+  return {
+    module: {
+      rules: [{
+        test: /\.(js|jsx)$/,
+        use: 'babel-loader',
+        include: paths,
+      }]
+    }
+  }
 }
 
 exports.extractBundle = function(options) {
-	const entry = {};
-	entry[options.name] = options.entries;
+  const entry = {};
+  entry[options.name] = options.entries;
 
-	console.log(chalk.underline(`Packageing in ${chalk.cyan(options.name)}`));
-	console.log(_.chain(options.entries)
-		.map(e => `  - ${e}`)
-		.join('\n')
-		.value()
-	);
+  console.log(chalk.underline(`Packageing in ${chalk.cyan(options.name)}`));
+  console.log(_.chain(options.entries)
+    .map(e => `  - ${e}`)
+    .join('\n')
+    .value()
+  );
 
-	return {
-		entry: entry,
-		plugins: [
-			new webpack.optimize.CommonsChunkPlugin({
-				names: [options.name, 'manifest'],
-			})
-		]
-	};
+  return {
+    entry: entry,
+    plugins: [
+      new webpack.optimize.CommonsChunkPlugin({
+        names: [options.name, 'manifest'],
+      })
+    ]
+  };
 }
 
 exports.setupCSS = function(path) {
-	return {
-		module: {
-			rules: [{
-				test: /\.css$/,
-				use: [
-					{ loader: 'style-loader' },
-					{ loader: 'css-loader' }
-				],
-				include: path
-			}]
-		}
-	};
+  return {
+    module: {
+      rules: [{
+        test: /\.css$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' }
+        ],
+        include: path
+      }]
+    }
+  };
 }
 exports.extractCSS = function(paths) {
-	return {
-		module: {
-			rules: [{
-				test: /\.css$/,
-				loader: ExtractTextPlugin.extract({
-					fallbackLoader: 'style-loader',
-					loader: 'css-loader',
-				}),
-				include: paths
-			}]
-		},
-		plugins: [
-			new ExtractTextPlugin('[name].[chunkhash:8].css')
-		]
-	};
+  return {
+    module: {
+      rules: [{
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader',
+        }),
+        include: paths
+      }]
+    },
+    plugins: [
+      new ExtractTextPlugin('[name].[chunkhash:8].css')
+    ]
+  };
 }
 
 //-------------- production ---------------
 exports.minify = function() {
-	return {
-		plugins: [
-			new webpack.optimize.UglifyJsPlugin({
-				comments: false,
-				compress: {
-					warnings: false,
-					drop_console: false
-				},
-				mangle: true
-			})
-		]
-	};
+  return {
+    plugins: [
+      new webpack.optimize.UglifyJsPlugin({
+        comments: false,
+        compress: {
+          warnings: false,
+          drop_console: false
+        },
+        mangle: true
+      })
+    ]
+  };
 }
 
 exports.purifyCSS = function(paths) {
-	return {
-		plugins: [
-			new PurifyCSSPlugin({
-				basePath: process.cwd(),
-				paths: paths.map(path => `${path}/*`),
-				resolveExtensions: ['.html']
-			}),
-		]
-	}
+  return {
+    plugins: [
+      new PurifyCSSPlugin({
+        basePath: process.cwd(),
+        paths: paths.map(path => `${path}/*`),
+        resolveExtensions: ['.html']
+      }),
+    ]
+  }
 }
 
 exports.clean = function(path) {
-	return {
-		plugins: [
-			new CleanWebpackPlugin([path], {
-				root: process.cwd()
-			})
-		]
-	};
+  return {
+    plugins: [
+      new CleanWebpackPlugin([path], {
+        root: process.cwd()
+      })
+    ]
+  };
 }
 
+// --------------- tools ---------------
+exports.eslint = function(path) {
+  return {
+    module: {
+      rules: [
+        {
+          test: /\.(js|jsx)$/,
+          use: 'eslint-loader',
+          enforce: 'pre',
+          include: path
+        }
+      ]
+    }
+  }
+}
 
 
 // -------------- dev tools ---------------
 exports.devServer = function(options) {
-	return {
-		devServer: {
-			historyApiFallback: true,
-				stats: 'minimal',
-				hot: true,
-				inline: true,
-				host: options.host || '0.0.0.0',
-				port: options.port || 3000
-		},
-		plugins: [
-			new webpack.HotModuleReplacementPlugin({})
-		]
-	}
+  return {
+    devServer: {
+      historyApiFallback: true,
+        stats: 'minimal',
+        hot: true,
+        inline: true,
+        host: options.host || '0.0.0.0',
+        port: options.port || 3000
+    },
+    plugins: [
+      new webpack.HotModuleReplacementPlugin({})
+    ]
+  }
 }
 
 exports.progress = function() {
-	return {
-		plugins: [
-			new NyanProgressPlugin()
-		]
-	}
+  return {
+    plugins: [
+      new NyanProgressPlugin()
+    ]
+  }
 }
 
