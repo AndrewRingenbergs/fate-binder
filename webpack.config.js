@@ -10,7 +10,8 @@ const PATHS = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'build'),
   styles: [
-    path.join(__dirname, 'app', 'main.css')
+    path.join(__dirname, 'node_modules', 'purecss'),
+    path.join(__dirname, 'app', 'main.css'),
   ]
 }
 
@@ -35,24 +36,30 @@ module.exports = function(env) {
 
   switch(env) {
     case 'production':
-      return merge(COMMON,
-        parts.clean(PATHS.build),
-        {
-          devtool: 'source-map',
-          output: {
-            filename: '[name].[chunkhash:8].js',
-            chunkFilename: '[chunkhash].js',
-            publicPath: ''
+      var base = {
+        resolve: {
+          alias: {
+            'react': 'react-lite',
+              'react-dom': 'react-lite'
           }
         },
+        devtool: 'source-map',
+        output: {
+          filename: '[name].[chunkhash:8].js',
+          chunkFilename: '[chunkhash].js',
+          publicPath: ''
+        }
+      }
+
+      return merge(COMMON, base,
+        parts.clean(PATHS.build),
         parts.extractBundle({
           name: 'vendor',
-          entries: Object.keys(pkg.dependencies)
+          entries: Object.keys(pkg.dependencies).filter(p => base.resolve.alias[p] == undefined )
         }),
-        parts.extractCSS(),
         parts.minify(),
         parts.eslint(PATHS.app),
-        parts.purifyCSS([PATHS.app]),
+        parts.extractCSS(PATHS.styles),
         parts.htmlTemplate({title: 'Roll for Initiative'})
       );
     case 'dev':
@@ -70,7 +77,7 @@ module.exports = function(env) {
           title: 'Roll for Initiative - Dev Server',
           devServer: 'http://localhost:3000'
         }),
-        parts.setupCSS(),
+        parts.setupCSS(PATHS.styles),
         parts.devServer({port: 3000})
       );
   }

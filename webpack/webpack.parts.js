@@ -4,7 +4,6 @@ const chalk = require('chalk');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackTemplate = require('html-webpack-template');
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const PurifyCSSPlugin = require('purifycss-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const NyanProgressPlugin = require('nyan-progress-webpack-plugin');
 
@@ -109,18 +108,6 @@ exports.minify = function() {
       })
     ]
   };
-}
-
-exports.purifyCSS = function(paths) {
-  return {
-    plugins: [
-      new PurifyCSSPlugin({
-        basePath: process.cwd(),
-        paths: paths.map(path => `${path}/*`),
-        resolveExtensions: ['.html']
-      }),
-    ]
-  }
 }
 
 exports.clean = function(path) {
