@@ -7,7 +7,8 @@
     "server": "webpack-dev-server --env dev",
     "start": "npm run server",
     "build": "webpack --env production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\"",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0",
     "extract-text-webpack-plugin": "^2.0.0-beta.4",
+    "gh-pages": "^0.12.0",
     "html-webpack-plugin": "^2.25.0",
     "html-webpack-template": "^6.0.0",
     "nyan-progress-webpack-plugin": "^1.1.4",
