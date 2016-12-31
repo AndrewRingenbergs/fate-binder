@@ -1,7 +1,4 @@
-import { createStore } from 'redux';
-import reducer from '../reducers';
-
-export default function configureStore(initialState) {
-  return createStore(reducer, initialState);
-}
+module.exports = process.env.NODE_ENV === 'production' ?
+  require('./configureStore.prod') :
+  require('./configureStore.dev');
 
