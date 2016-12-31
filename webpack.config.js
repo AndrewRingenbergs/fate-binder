@@ -14,18 +14,22 @@ const PATHS = {
 	]
 }
 
-const COMMON = {
+const COMMON = merge({
 	entry: {
 		app: PATHS.app,
-			styles: PATHS.styles
+    styles: PATHS.styles,
 	},
 	output: {
 		filename: '[name].js',
 		path: PATHS.build
+	},
+	resolve: {
+		extensions: ['.js', '.jsx']
 	}
-}
+},
+parts.setupBabel(PATHS.app));
 
-module.exports = function(env) {
+const conf = function(env) {
 	console.log(`Building in Environment ${chalk.underline.yellow(env)}`);
 
 	switch(env) {
@@ -63,8 +67,16 @@ module.exports = function(env) {
 					title: 'Roll for Initiative - Dev Server',
 					devServer: 'http://localhost:3000'
 				}),
-				parts.setupCSS(),
+        parts.setupCSS(),
 				parts.devServer({port: 3000})
 			);
 	}
 }
+
+
+
+
+console.log(conf('dev'))
+
+
+module.exports = conf

@@ -14,9 +14,9 @@ const _ = require('lodash');
 exports.htmlTemplate = function(options) {
 	let pluginOptions = {
 		title: options.title || 'New App',
-		template: HtmlWebpackTemplate,
+    template: HtmlWebpackTemplate,
 		inject: false,
-		appMountId: 'app'
+		appMountId: 'root',
 	};
 
 	if(options.devServer) {
@@ -25,10 +25,23 @@ exports.htmlTemplate = function(options) {
 
 	return {
 		plugins: [
-			new HTMLWebpackPlugin(options)
+			new HTMLWebpackPlugin(pluginOptions)
 		]
 	}
 }
+
+exports.setupBabel = function(paths) {
+	return {
+		module: {
+			rules: [{
+				test: /\.(js|jsx)$/,
+				use: 'babel-loader',
+				include: paths,
+			}]
+		}
+	}
+}
+
 exports.extractBundle = function(options) {
 	const entry = {};
 	entry[options.name] = options.entries;
