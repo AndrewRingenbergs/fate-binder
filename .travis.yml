@@ -4,12 +4,6 @@ node_js:
 branches:
   except:
   - gh-pages
-deploy:
-  skip_cleanup: true
-  provider: script
-  script: npm run deploy
-  on:
-    branch: master
 env:
   global:
   - SSH_KEY="id_rsa"
@@ -20,3 +14,9 @@ env:
 before_install:
 - openssl aes-256-cbc -K $encrypted_baf88b1a632e_key -iv $encrypted_baf88b1a632e_iv
   -in id_rsa.enc -out id_rsa -d
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: npm run deploy
+  on:
+    branch: master
