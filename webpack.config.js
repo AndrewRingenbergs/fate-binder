@@ -69,6 +69,7 @@ module.exports = function(env) {
     case 'dev':
       return merge(COMMON,
         {
+          entry: {vendor: Object.keys(pkg.dependencies)},
           devtool: 'eval-source-map',
           performance: {
             hints: false
@@ -76,10 +77,6 @@ module.exports = function(env) {
         },
         nodeEnv,
         parts.progress(),
-        parts.extractBundle({
-          name: 'vendor',
-          entries: Object.keys(pkg.dependencies)
-        }),
         parts.eslint(PATHS.app),
         parts.htmlTemplate({
           title: 'Roll for Initiative - Dev Server',
