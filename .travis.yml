@@ -9,7 +9,7 @@ env:
   - SSH_KEY="id_rsa"
   - GIT_NAME="Aaron Edwards (CI)"
   - GIT_EMAIL="mr.amedw@gmail.com"
-  - SOURCE_DIR="dist"
+  - SOURCE_DIR="build"
   - DEPLOY_BRANCH="master"
 deploy:
   skip_cleanup: true
