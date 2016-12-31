@@ -1,0 +1,15 @@
+{
+  "name": "roll-for-initiative",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:amedw/Roll-for-Initiative.git"
+  },
+  "author": "Aaron Edwards",
+  "license": "MIT"
+}
