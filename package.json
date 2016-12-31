@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "server": "webpack-dev-server --env dev",
+    "start": "npm run server",
+    "build": "webpack --env production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -11,5 +14,23 @@
     "url": "git@github.com:amedw/Roll-for-Initiative.git"
   },
   "author": "Aaron Edwards",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-register": "^6.18.0",
+    "chalk": "^1.1.3",
+    "clean-webpack-plugin": "^0.1.14",
+    "css-loader": "^0.26.1",
+    "extract-text-webpack-plugin": "^2.0.0-beta.4",
+    "html-webpack-plugin": "^2.25.0",
+    "nyan-progress-webpack-plugin": "^1.1.4",
+    "purifycss-webpack-plugin": "^2.0.3",
+    "style-loader": "^0.13.1",
+    "webpack": "^2.2.0-rc.3",
+    "webpack-dev-server": "^2.2.0-rc.0",
+    "webpack-merge": "^2.0.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.3",
+    "purecss": "^0.6.1"
+  }
 }
