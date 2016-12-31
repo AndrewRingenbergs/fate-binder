@@ -14,7 +14,7 @@ exports.htmlTemplate = function(options) {
   let pluginOptions = {
     title: options.title || 'New App',
     template: HtmlWebpackTemplate,
-    inject: false,
+    inject: true,
     appMountId: 'root',
   };
 
