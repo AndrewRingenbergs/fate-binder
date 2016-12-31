@@ -4,9 +4,6 @@ node_js:
 branches:
   except:
   - gh-pages
-before_deploy:
-- openssl aes-256-cbc -K $encrypted_f4baed597c4a_key -iv $encrypted_f4baed597c4a_iv
-  -in id_rsa.enc -out id_rsa -d
 deploy:
   skip_cleanup: true
   provider: script
@@ -16,7 +13,10 @@ deploy:
 env:
   global:
   - SSH_KEY="id_rsa"
-  - GIT_NAME="AndrewRingenbergs - CI"
-  - GIT_EMAIL="AndrewRingenbergs@CI.com"
+  - GIT_NAME="Aaron Edwards (CI)"
+  - GIT_EMAIL="mr.amedw@gmail.com"
   - SOURCE_DIR="dist"
   - DEPLOY_BRANCH="master"
+before_install:
+- openssl aes-256-cbc -K $encrypted_baf88b1a632e_key -iv $encrypted_baf88b1a632e_iv
+  -in id_rsa.enc -out id_rsa -d
