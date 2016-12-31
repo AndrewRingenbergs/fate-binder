@@ -33,6 +33,9 @@ const COMMON = merge(
 
 module.exports = function(env) {
   console.log(`Building in Environment ${chalk.underline.yellow(env)}`);
+  var nodeEnv = parts.setFreeVariable('process.env.NODE_ENV', env);
+  process.env.BABEL_ENV = env;
+
 
   switch(env) {
     case 'production':
@@ -53,6 +56,7 @@ module.exports = function(env) {
 
       return merge(COMMON, base,
         parts.clean(PATHS.build),
+        nodeEnv,
         parts.extractBundle({
           name: 'vendor',
           entries: Object.keys(pkg.dependencies).filter(p => base.resolve.alias[p] == undefined )
@@ -70,6 +74,7 @@ module.exports = function(env) {
             hints: false
           }
         },
+        nodeEnv,
         parts.progress(),
         parts.extractBundle({
           name: 'vendor',

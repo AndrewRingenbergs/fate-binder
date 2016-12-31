@@ -110,6 +110,17 @@ exports.minify = function() {
   };
 }
 
+exports.setFreeVariable = function(key, value) {
+  const env = {};
+  env[key] = JSON.stringify(value);
+
+  return {
+    plugins: [
+      new webpack.DefinePlugin(env)
+    ]
+  };
+}
+
 exports.clean = function(path) {
   return {
     plugins: [
