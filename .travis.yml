@@ -6,17 +6,10 @@ branches:
   - gh-pages
 env:
   global:
-  - SSH_KEY="id_rsa"
-  - GIT_NAME="Aaron Edwards (CI)"
-  - GIT_EMAIL="mr.amedw@gmail.com"
-  - SOURCE_DIR="build"
-  - DEPLOY_BRANCH="master"
+  - secure: XvW/AZY1HP1XhS13BYOjq6r9SN3Idbblfcf3R1Egc8vx8F+qofHhsykmO1S9dgS1BsMXg7u+GP0qJhLLAtWCruPB4Uyxc/BD0/S1ceLbp5aHW6d9tnbVAN6ygnlj9kG5KCLX8qwe3WA1dcEwVtjRF1kZiLUPe/W2UFqezS1YmKQ/hKQ4bLJ3Ff1swFFc0GYEjADIdde9PAiXlJ78ic+ts76uMZhImJ3RMDSdbPZxFsi7W7JJy6LQo5tVSwT2QIMMWtqmmmPxjAQ8rEMZZdAOC8q9aASEBU2ylEFXPGSz0E/T9PLBmFn4nJJvAzfLENxjZ45MvFTFQU3zf0X4asMcKCRi4tjiqTPEqHoQGLRx+cPgefrDWQTHIgXkuOiYziT13Ukt8VFsQrRR6eEKCuzuCwj0CC/hruWIhumyU/G6hgIrXljnvvs9TTKwFhlrIZuIAHjGXF92jmxQYSR5ZSTvYyYnF70dhzS3WEGLNRCKjhhdJaPhBl7s+LjcJcdy6cNmZDjqrkiE46V2t6QBo5mxq1G8yHJwRQEsadFx8YeF+AWXDLbW710kuMCH1E9WSEBppxeGmMJpV4pgCFkxJoPqmW1rI1WrIiKalg6KVg8VWGfC9DJwavYJaIuNzazYdCbSY41bpaef9fVIyDwujeR3zuepelVSqvzqr+vdhQcBoiw=
 deploy:
   skip_cleanup: true
   provider: script
-  script: npm run deploy
+  script: npm run deploy:prod
   on:
     branch: master
-before_install:
-- openssl aes-256-cbc -K $encrypted_baf88b1a632e_key -iv $encrypted_baf88b1a632e_iv
-  -in id_rsa.enc -out id_rsa -d

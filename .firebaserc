@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "roll-for-initiative-c9540"
+    "production": "roll-for-initiative",
+    "dev": "roll-for-initiative-dev"
   }
 }
