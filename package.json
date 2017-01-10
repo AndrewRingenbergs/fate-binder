@@ -8,7 +8,7 @@
     "start": "npm run server",
     "build": "webpack --env production",
     "test": "echo \"Error: no test specified\"",
-    "deploy:prod": "npm run build && firebase deploy -P production --token=${FIREBASE_TOKEN}"
+    "deploy:prod": "npm run build && firebase deploy -P default --token=${FIREBASE_TOKEN}"
   },
   "repository": {
     "type": "git",

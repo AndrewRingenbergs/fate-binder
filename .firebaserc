@@ -1,5 +1,6 @@
 {
   "projects": {
+    "default": "roll-for-initiatve",
     "production": "roll-for-initiative",
     "dev": "roll-for-initiative-dev"
   }
