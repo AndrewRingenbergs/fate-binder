@@ -7,7 +7,8 @@
     "server": "webpack-dev-server --env dev",
     "start": "npm run server",
     "build": "webpack --env production",
-    "test": "echo \"Error: no test specified\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "deploy:prod": "npm run build && firebase deploy -P default --token=${FIREBASE_TOKEN}"
   },
   "repository": {
@@ -35,6 +36,7 @@
     "firebase-tools": "^3.2.1",
     "html-webpack-plugin": "^2.26.0",
     "html-webpack-template": "^6.0.0",
+    "jest": "^18.1.0",
     "nyan-progress-webpack-plugin": "^1.1.4",
     "purifycss-webpack-plugin": "^2.0.3",
     "redux-devtools": "^3.3.2",
