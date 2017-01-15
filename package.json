@@ -8,7 +8,7 @@
     "start": "npm run server",
     "build": "webpack --env production",
     "test": "jest",
-    "test:watch": "jest --watch",
+    "test:watch": "jest --watch --notify",
     "deploy:prod": "npm run build && firebase deploy -P default --token=${FIREBASE_TOKEN}"
   },
   "repository": {
@@ -48,6 +48,7 @@
     "webpack-merge": "^2.4.0"
   },
   "dependencies": {
+    "immutable": "^3.8.1",
     "lodash": "^4.17.4",
     "purecss": "^0.6.2",
     "react": "^15.4.2",
