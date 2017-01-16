@@ -1,0 +1,13 @@
+:local(.user-display) {
+  display: block;
+  float: right;
+}
+
+
+:local(.home-menu) {
+  background: #2d3e50;
+}
+
+:global(.pure-menu-heading) {
+  color: white;
+}

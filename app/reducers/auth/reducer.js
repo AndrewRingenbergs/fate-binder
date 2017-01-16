@@ -5,6 +5,7 @@ import { INIT_AUTH, SIGN_IN_SUCCESS, SIGN_OUT_SUCCESS } from './action-types';
 export const AuthState = new Record({
   authenticated: false,
   id: null,
+  username: null,
 });
 
 export default function authReducer(state = new AuthState(), { payload, type }) {
@@ -14,6 +15,7 @@ export default function authReducer(state = new AuthState(), { payload, type }) 
       return state.merge({
         authenticated: !!payload,
         id: payload ? payload.uid : null,
+        username: payload ? payload.username : null
       });
     case SIGN_OUT_SUCCESS:
       return new AuthState();

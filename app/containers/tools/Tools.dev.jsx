@@ -6,6 +6,6 @@ import DockMonitor from 'redux-devtools-dock-monitor';
 /* eslint-enable import/no-extraneous-dependencies */
 
 export default createDevTools(
-  <DockMonitor toggleVisibilityKey="ctrl-h" changePositionKey="ctrl-q" >
+  <DockMonitor toggleVisibilityKey="ctrl-h" changePositionKey="ctrl-q" defaultPosition="bottom" >
     <LogMonitor theme="solarized" />
   </DockMonitor>);

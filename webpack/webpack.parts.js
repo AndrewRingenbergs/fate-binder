@@ -14,7 +14,7 @@ exports.htmlTemplate = function(options) {
   let pluginOptions = {
     title: options.title || 'New App',
     template: HtmlWebpackTemplate,
-    inject: true,
+    inject: false,
     appMountId: 'root',
   };
 
@@ -62,20 +62,6 @@ exports.extractBundle = function(options) {
   };
 }
 
-exports.setupCSS = function(path) {
-  return {
-    module: {
-      rules: [{
-        test: /\.css$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' }
-        ],
-        include: path
-      }]
-    }
-  };
-}
 exports.extractCSS = function(paths) {
   return {
     module: {
@@ -94,6 +80,45 @@ exports.extractCSS = function(paths) {
   };
 }
 
+cssLoaderQuery = {
+  module: true,
+  camelCase: true,
+  localIdentName: '[path][name]__[local]--[hash:base64:5]'
+}
+
+exports.extractCSSModules = function(paths) {
+  return {
+    module: {
+      rules: [{
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader',
+          query: cssLoaderQuery
+        }),
+        include: paths
+      }]
+    },
+    plugins: [
+      new ExtractTextPlugin('[name].[chunkhash:8].css')
+    ]
+  };
+}
+
+exports.inlineCSSModules = function(path) {
+  return {
+    module: {
+      rules: [{
+        test: /\.css$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader', query: cssLoaderQuery }
+        ],
+        include: path
+      }]
+    }
+  };
+}
 //-------------- production ---------------
 exports.minify = function() {
   return {

@@ -7,11 +7,10 @@ const pkg = require('./package.json');
 const parts = require('./webpack/webpack.parts');
 
 const PATHS = {
-  app: path.join(__dirname, 'app'),
+  app: [ path.join(__dirname, 'app') ],
   build: path.join(__dirname, 'build'),
   styles: [
     path.join(__dirname, 'node_modules', 'purecss'),
-    path.join(__dirname, 'app', 'main.css'),
   ]
 }
 
@@ -19,7 +18,6 @@ const COMMON = merge(
   {
     entry: {
       app: PATHS.app,
-        styles: PATHS.styles,
     },
     output: {
       filename: '[name].js',
@@ -63,13 +61,14 @@ module.exports = function(env) {
         }),
         parts.minify(),
         parts.eslint(PATHS.app),
+        parts.extractCSSModules(PATHS.app),
         parts.extractCSS(PATHS.styles),
         parts.htmlTemplate({title: 'Roll for Initiative'})
       );
     case 'dev':
-      return merge(COMMON,
+      return merge({ entry: { app: PATHS.styles } },
+        COMMON,
         {
-          entry: {vendor: Object.keys(pkg.dependencies)},
           devtool: 'eval-source-map',
           performance: {
             hints: false
@@ -82,7 +81,8 @@ module.exports = function(env) {
           title: 'Roll for Initiative - Dev Server',
           devServer: 'http://localhost:3000'
         }),
-        parts.setupCSS(PATHS.styles),
+        parts.inlineCSSModules(PATHS.app),
+        parts.extractCSS(PATHS.styles),
         parts.devServer({port: 3000})
       );
   }
