@@ -1,1 +1,5 @@
-exports[`<App /> should contain the name of the application 1`] = `<Root />`;
+exports[`<App /> should contain the name of the application 1`] = `
+<div>
+  <Connect(HeadingComponent) />
+</div>
+`;

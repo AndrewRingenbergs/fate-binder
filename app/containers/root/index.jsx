@@ -3,6 +3,8 @@ import Header from '../heading';
 
 export default class Root extends React.Component {
   render() {
-    return <Header />;
+    return <div>
+      <Header />
+    </div>;
   }
 }

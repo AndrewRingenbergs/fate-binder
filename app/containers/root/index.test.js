@@ -1,10 +1,13 @@
+import jest from 'jest';
+
 import React from 'react';
-import { shallow } from 'enzyme';
+import renderer from 'react-test-renderer';
+import shallowRenderer from 'react-shallow-renderer';
 import App from './index';
 
 describe('<App />', ()=>{
   test('should contain the name of the application', ()=>{
-    const app = <App />;
+    const app = shallowRenderer(<App />);
     expect(app).toMatchSnapshot();
   });
 });
