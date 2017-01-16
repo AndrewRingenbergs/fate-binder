@@ -98,7 +98,7 @@ exports.extractCSSModules = function(paths) {
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style-loader',
           loader: [
-            {loader: 'css-loader', options: cssLoaderQuery},
+            {loader: 'css-loader', query: cssLoaderQuery},
             {loader: 'sass-loader'}
           ]
         }),

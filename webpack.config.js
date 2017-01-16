@@ -9,7 +9,7 @@ const parts = require('./webpack/webpack.parts');
 const cssLibraries = [
   'purecss',
   path.join('purecss', 'build','grids-responsive-min.css'),
-  path.join('font-awesome', 'css','font-awesome.css')
+  path.join('font-awesome', 'css','font-awesome.min.css')
 ];
 
 const PATHS = {
@@ -46,7 +46,7 @@ module.exports = function(env) {
         resolve: {
           alias: {
             'react': 'react-lite',
-              'react-dom': 'react-lite'
+              'react-dom': 'react-lite',
           }
         },
         devtool: 'source-map',
@@ -57,12 +57,14 @@ module.exports = function(env) {
         }
       }
 
-      return merge(COMMON, base,
+      return merge({ entry: { app: PATHS.styles } },
+        COMMON,
+        base,
         parts.clean(PATHS.build),
         nodeEnv,
         parts.extractBundle({
           name: 'vendor',
-          entries: Object.keys(pkg.dependencies).filter(p => base.resolve.alias[p] == undefined )
+          entries: Object.keys(pkg.dependencies).filter(p => base.resolve.alias[p] == undefined && p !== 'font-awesome' )
         }),
         parts.minify(),
         parts.eslint(PATHS.app),
