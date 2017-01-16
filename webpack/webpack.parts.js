@@ -16,6 +16,10 @@ exports.htmlTemplate = function(options) {
     template: HtmlWebpackTemplate,
     inject: false,
     appMountId: 'root',
+    meta: [
+      {name: "viewport" ,
+      content: "width=device-width, initial-scale=1"}
+    ]
   };
 
   if(options.devServer) {
@@ -66,7 +70,7 @@ exports.extractCSS = function(paths) {
   return {
     module: {
       rules: [{
-        test: /\.css$/,
+        test: /\.(css)$/,
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style-loader',
           loader: 'css-loader',
@@ -90,11 +94,13 @@ exports.extractCSSModules = function(paths) {
   return {
     module: {
       rules: [{
-        test: /\.css$/,
+        test: /\.(css|scss)$/,
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style-loader',
-          loader: 'css-loader',
-          query: cssLoaderQuery
+          loader: [
+            {loader: 'css-loader', options: cssLoaderQuery},
+            {loader: 'sass-loader'}
+          ]
         }),
         include: paths
       }]
@@ -109,15 +115,35 @@ exports.inlineCSSModules = function(path) {
   return {
     module: {
       rules: [{
-        test: /\.css$/,
+        test: /\.(css|scss)$/,
         use: [
           { loader: 'style-loader' },
-          { loader: 'css-loader', query: cssLoaderQuery }
+          { loader: 'css-loader', query: cssLoaderQuery },
+          {loader: 'sass-loader'}
         ],
         include: path
       }]
     }
   };
+}
+
+exports.fileLoader = function() {
+  return {
+    module: {
+      rules: [{
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        use: [
+          {loader: "file-loader" }
+        ]}, {
+          test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          use: [{
+            loader: 'url-loader',
+            query: {limit:10000, mimetype:'application/font-woff'}
+          }]
+        }
+      ]
+    }
+  }
 }
 //-------------- production ---------------
 exports.minify = function() {

@@ -1,0 +1,43 @@
+.signInHeading {
+  text-align: center;
+}
+
+.login-button {
+  width: 200px;
+  height: 100px;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 2em;
+  color: #AAAAAA;
+  border: 2px solid #AAAAAA;
+  margin-bottom: 2em;
+  padding-top: 1em;
+  cursor: pointer;
+
+  -webkit-transition : border 250ms ease-out;
+  -moz-transition : border 250ms ease-out;
+  -o-transition : border 250ms ease-out;
+  transition : border 250ms ease-out;
+  -webkit-transition : color 250ms ease-out;
+  -moz-transition : color 250ms ease-out;
+  -o-transition : color 250ms ease-out;
+  transition : color 250ms ease-out;
+
+  &:hover {
+    border-color: #000000;
+    color: #000000
+  }
+}
+
+
+.grid-wide {
+	margin-left:-5px;
+	margin-top:-5px;
+	& > [class *=pure-u] {
+	  box-sizing: border-box;
+	  padding-left:5px;
+	  padding-top:5px;
+	}
+}
+

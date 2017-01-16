@@ -6,18 +6,22 @@ const merge = require('webpack-merge');
 const pkg = require('./package.json');
 const parts = require('./webpack/webpack.parts');
 
+const cssLibraries = [
+  'purecss',
+  path.join('purecss', 'build','grids-responsive-min.css'),
+  path.join('font-awesome', 'css','font-awesome.css')
+];
+
 const PATHS = {
-  app: [ path.join(__dirname, 'app') ],
+  app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'build'),
-  styles: [
-    path.join(__dirname, 'node_modules', 'purecss'),
-  ]
+  styles: cssLibraries.map(l => path.join(__dirname, 'node_modules', l))
 }
 
 const COMMON = merge(
   {
     entry: {
-      app: PATHS.app,
+      app: [PATHS.app],
     },
     output: {
       filename: '[name].js',
@@ -27,6 +31,7 @@ const COMMON = merge(
       extensions: ['.js', '.jsx']
     }
   },
+  parts.fileLoader(),
   parts.setupBabel(PATHS.app));
 
 module.exports = function(env) {

@@ -28,7 +28,11 @@ export class HeadingComponent extends React.Component {
 
 HeadingComponent.propTypes = {
   username: React.PropTypes.string,
-  authenticated: React.PropTypes.bool,
+  authenticated: React.PropTypes.bool.isRequired,
+};
+
+HeadingComponent.defaultProps = {
+  username: null,
 };
 
 export default connect(mapStateToProps)(HeadingComponent);
