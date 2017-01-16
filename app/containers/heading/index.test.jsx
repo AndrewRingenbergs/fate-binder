@@ -4,7 +4,7 @@ import { HeadingComponent } from './index';
 
 describe('<Heading />', ()=>{
   test('should contain the name of the application', ()=>{
-    const app = shallow(<HeadingComponent />);
+    const app = shallow(<HeadingComponent authenticated={false} />);
     expect(app.text()).toContain('Roll for Initiative');
   });
 
