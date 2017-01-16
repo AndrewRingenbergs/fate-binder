@@ -1,4 +1,5 @@
-import { createStore, compose } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
+import thunk from 'redux-thunk';
 
 /* eslint-disable import/no-extraneous-dependencies */
 import { persistState } from 'redux-devtools';
@@ -14,6 +15,7 @@ function getDebugSessionKey() {
 }
 
 const createStoreWithMiddleware = compose(
+  applyMiddleware(thunk),
   DevTools.instrument(),
   persistState(getDebugSessionKey()))(createStore);
 

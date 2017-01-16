@@ -18,7 +18,7 @@ describe('Authentication Reducer', () => {
     it('should set AuthState.authenticated to true when payload provided', () => {
       const state = authReducer(undefined, {
         type: INIT_AUTH,
-        payload: { uid: '123', username: 'Someone'}
+        payload: { uid: '123', displayName: 'Someone'}
       });
 
       expect(state.authenticated).toBe(true);
@@ -31,7 +31,7 @@ describe('Authentication Reducer', () => {
     it('should set AuthState.authenticated to true', () => {
       const state = authReducer(undefined, {
         type: INIT_AUTH,
-        payload: { uid: '123', username: 'Someone'}
+        payload: { uid: '123', displayName: 'Someone'}
       });
 
       expect(state.authenticated).toBe(true);

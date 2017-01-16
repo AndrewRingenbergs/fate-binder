@@ -15,7 +15,7 @@ export default function authReducer(state = new AuthState(), { payload, type }) 
       return state.merge({
         authenticated: !!payload,
         id: payload ? payload.uid : null,
-        username: payload ? payload.username : null,
+        username: payload ? payload.displayName : null,
       });
     case SIGN_OUT_SUCCESS:
       return new AuthState();

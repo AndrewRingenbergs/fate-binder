@@ -1,8 +1,13 @@
+.signInForm {
+  text-align: center;
+}
+
 .signInHeading {
   text-align: center;
 }
 
 .login-button {
+  background:none;
   width: 200px;
   height: 100px;
   text-align: center;
@@ -12,7 +17,6 @@
   color: #AAAAAA;
   border: 2px solid #AAAAAA;
   margin-bottom: 2em;
-  padding-top: 1em;
   cursor: pointer;
 
   -webkit-transition : border 250ms ease-out;
