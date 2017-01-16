@@ -15,9 +15,12 @@ export class LoginComponent extends React.Component {
       { name: 'Twitter', icon: 'fa-twitter', action: this.props.signInWithTwitter },
     ];
 
+    const error = this.props.loginError;
+
     return (
       <div className={`pure-g ${css.signInForm}`}>
         <h1 className={`pure-u-1-1 ${css.signInHeading}`}>Sign in</h1>
+        <h3 className={`pure-u-1-1 ${css.signInError}`} > {error} </h3>
         {
           buttons.map(provider =>
             <LoginButton
@@ -37,6 +40,15 @@ LoginComponent.propTypes = {
   signInWithGoogle: React.PropTypes.func.isRequired,
   signInWithFacebook: React.PropTypes.func.isRequired,
   signInWithTwitter: React.PropTypes.func.isRequired,
+  loginError: React.PropTypes.string,
 };
 
-export default connect(null, authActions)(LoginComponent);
+LoginComponent.defaultProps = {
+  loginError: null,
+};
+
+function mapStateToProps(state) {
+  return { loginError: state.auth.error };
+}
+
+export default connect(mapStateToProps, authActions)(LoginComponent);

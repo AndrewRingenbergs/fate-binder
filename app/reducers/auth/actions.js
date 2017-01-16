@@ -17,7 +17,7 @@ export function signInSuccess(result) {
 export function signInError(error) {
   return {
     type: SIGN_IN_ERROR,
-    payload: error,
+    payload: { errorMessage: error.message },
   };
 }
 
