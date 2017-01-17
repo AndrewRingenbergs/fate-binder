@@ -15,20 +15,16 @@ function mapStateToProps(state) {
 export class HeadingComponent extends React.Component {
   render() {
     const message = 'Roll for Initiative';
-    const user = this.props.username || 'Guest';
-    const photo = this.props.photo ? <img src={this.props.photo} alt="profile" width="25" height="25" /> : null;
-
-    const logoutButton = this.props.authenticated ?
-      <button onClick={this.props.signOut}>Logout</button> :
-      null;
+    const photo = this.props.photo ? <img className={css.profilePic} src={this.props.photo} alt="profile" width="35" height="35" /> : null;
+    const logoutButton = <button onClick={this.props.signOut}>Logout</button>;
 
     return (<div className={`pure-menu pure-menu-horizontal ${css.homeMenu}`}>
-      <h4 className="pure-menu-heading">{message}</h4>
-      <span className={css.userDisplay}>
-        { photo }
-        { user }
-        { logoutButton }
-      </span>
+      <h2 className="pure-menu-heading">{message}</h2>
+      <div className={css.userDisplay}>
+        <span className={css.photoSpan}>{ this.props.photo ? photo : null }</span>
+        <span className={css.username}>{this.props.username || 'Guest'}</span>
+        <span>{this.props.authenticated ? logoutButton : null}</span>
+      </div>
     </div>);
   }
 }

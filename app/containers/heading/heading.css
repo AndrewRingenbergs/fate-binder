@@ -1,6 +1,21 @@
+.profile-pic {
+  border-radius: 50%;
+}
+
+.username {
+  color: white
+}
+
+.photo-span {
+  height: 40px;
+}
+
 :local(.user-display) {
-  display: block;
   float: right;
+  > span {
+    display: block;
+    text-align: center;
+  }
 }
 
 
