@@ -1,4 +1,5 @@
 import { applyMiddleware, compose, createStore } from 'redux';
+import { persistStore, autoRehydrate } from 'redux-persist';
 import thunk from 'redux-thunk';
 
 /* eslint-disable import/no-extraneous-dependencies */
@@ -16,11 +17,15 @@ function getDebugSessionKey() {
 
 const createStoreWithMiddleware = compose(
   applyMiddleware(thunk),
+  autoRehydrate(),
   DevTools.instrument(),
-  persistState(getDebugSessionKey()))(createStore);
+  persistState(getDebugSessionKey()),
+)(createStore);
 
-export default function configureStore(initialState) {
-  const store = createStoreWithMiddleware(rootReducer, initialState);
+export default function configureStore() {
+  const store = createStoreWithMiddleware(rootReducer);
+
+  persistStore(store);
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
