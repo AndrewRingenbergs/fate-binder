@@ -7,7 +7,7 @@ import App from './index';
 
 describe('<App />', ()=>{
   test('should contain the name of the application', ()=>{
-    const app = shallowRenderer(<App />);
+    const app = shallowRenderer(<App><p>Hello World</p></App>);
     expect(app).toMatchSnapshot();
   });
 });

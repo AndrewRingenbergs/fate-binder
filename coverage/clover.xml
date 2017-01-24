@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1484793617861" clover="3.2.0">
+  <project timestamp="1484793617861" name="All files">
+    <metrics statements="42" coveredstatements="28" conditionals="26" coveredconditionals="21" methods="21" coveredmethods="7" elements="89" coveredelements="56" complexity="0" loc="42" ncloc="42" packages="5" files="9" classes="9">
+      <package name="containers.heading">
+        <metrics statements="7" coveredstatements="6" conditionals="8" coveredconditionals="6" methods="2" coveredmethods="1"/>
+        <file name="index.jsx" path="/Users/aaron/development/personal/roll-for-initiative/app/containers/heading/index.jsx">
+          <metrics statements="7" coveredstatements="6" conditionals="8" coveredconditionals="6" methods="2" coveredmethods="1"/>
+          <line num="9" count="5" type="stmt"/>
+          <line num="10" count="5" type="stmt"/>
+          <line num="11" count="5" type="stmt"/>
+          <line num="13" count="5" type="stmt"/>
+          <line num="24" count="2" type="stmt"/>
+          <line num="31" count="2" type="stmt"/>
+          <line num="36" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="containers.root">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <file name="index.jsx" path="/Users/aaron/development/personal/roll-for-initiative/app/containers/root/index.jsx">
+          <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+          <line num="7" count="1" type="stmt"/>
+          <line num="15" count="1" type="stmt"/>
+          <line num="19" count="1" type="stmt"/>
+        </file>
+      </package>
+      <package name="containers.tools">
+        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
+        <file name="Tools.dev.jsx" path="/Users/aaron/development/personal/roll-for-initiative/app/containers/tools/Tools.dev.jsx">
+          <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        </file>
+        <file name="index.js" path="/Users/aaron/development/personal/roll-for-initiative/app/containers/tools/index.js">
+          <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
+          <line num="1" count="1" type="stmt"/>
+        </file>
+      </package>
+      <package name="firebase">
+        <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
+        <file name="config.js" path="/Users/aaron/development/personal/roll-for-initiative/app/firebase/config.js">
+          <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
+          <line num="1" count="3" type="stmt"/>
+        </file>
+        <file name="index.js" path="/Users/aaron/development/personal/roll-for-initiative/app/firebase/index.js">
+          <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="4" count="3" type="stmt"/>
+          <line num="5" count="3" type="stmt"/>
+          <line num="6" count="3" type="stmt"/>
+        </file>
+      </package>
+      <package name="reducers.auth">
+        <metrics statements="27" coveredstatements="14" conditionals="14" coveredconditionals="13" methods="18" coveredmethods="5"/>
+        <file name="action-types.js" path="/Users/aaron/development/personal/roll-for-initiative/app/reducers/auth/action-types.js">
+          <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="4" type="stmt"/>
+          <line num="2" count="4" type="stmt"/>
+          <line num="3" count="4" type="stmt"/>
+          <line num="4" count="4" type="stmt"/>
+        </file>
+        <file name="actions.js" path="/Users/aaron/development/personal/roll-for-initiative/app/reducers/auth/actions.js">
+          <metrics statements="17" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="17" coveredmethods="4"/>
+          <line num="12" count="1" type="stmt"/>
+          <line num="19" count="1" type="stmt"/>
+          <line num="26" count="1" type="stmt"/>
+          <line num="32" count="0" type="stmt"/>
+          <line num="33" count="0" type="stmt"/>
+          <line num="34" count="0" type="stmt"/>
+          <line num="35" count="0" type="stmt"/>
+          <line num="36" count="0" type="stmt"/>
+          <line num="41" count="1" type="stmt"/>
+          <line num="48" count="0" type="stmt"/>
+          <line num="53" count="0" type="stmt"/>
+          <line num="57" count="0" type="stmt"/>
+          <line num="61" count="0" type="stmt"/>
+          <line num="65" count="0" type="stmt"/>
+          <line num="66" count="0" type="stmt"/>
+          <line num="67" count="0" type="stmt"/>
+          <line num="68" count="0" type="stmt"/>
+        </file>
+        <file name="reducer.js" path="/Users/aaron/development/personal/roll-for-initiative/app/reducers/auth/reducer.js">
+          <metrics statements="6" coveredstatements="6" conditionals="14" coveredconditionals="13" methods="1" coveredmethods="1"/>
+          <line num="8" count="1" type="stmt"/>
+          <line num="17" count="7" type="stmt"/>
+          <line num="20" count="3" type="stmt"/>
+          <line num="29" count="2" type="stmt"/>
+          <line num="31" count="1" type="stmt"/>
+          <line num="36" count="1" type="stmt"/>
+        </file>
+      </package>
+    </metrics>
+  </project>
+</coverage>

@@ -1,6 +1,9 @@
 exports[`<App /> should contain the name of the application 1`] = `
 <div>
   <Connect(HeadingComponent) />
-  <Connect(LoginComponent) />
+  <p>
+    Hello World
+  </p>
+  <DevTools />
 </div>
 `;

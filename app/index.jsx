@@ -2,20 +2,31 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
-import { browserHistory } from 'react-router';
+import { browserHistory, Router } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import Tools from './containers/tools';
+import App from './app';
 import configureStore from './store';
-import App from './containers/root';
+import routes from './routes';
 
-const store = configureStore({});
+const store = configureStore(browserHistory);
 const syncedHistory = syncHistoryWithStore(browserHistory, store);
 
-render(
-  <Provider history={syncedHistory} store={store}>
-    <div>
-      <App />
-      <Tools />
-    </div>
-  </Provider>, document.getElementById('root'));
+function bindCheckAuth(redux) {
+  return (check, handler) => (nextState, transition) => {
+    const authState = redux.getState().auth;
+    if (check(authState)) {
+      handler(nextState, transition);
+    }
+  };
+}
+
+render((
+  <App store={store}>
+    <Provider history={syncedHistory} store={store}>
+      <Router history={browserHistory}>
+        { routes(bindCheckAuth(store)) }
+      </Router>
+    </Provider>
+  </App>
+), document.getElementById('root'));

@@ -4,14 +4,6 @@ import { signOut } from '../../reducers/auth/actions';
 
 import css from './heading.css';
 
-function mapStateToProps(state) {
-  return {
-    authenticated: state.auth.authenticated,
-    username: state.auth.username,
-    photo: state.auth.photo,
-  };
-}
-
 export class HeadingComponent extends React.Component {
   render() {
     const message = 'Roll for Initiative';
@@ -30,10 +22,10 @@ export class HeadingComponent extends React.Component {
 }
 
 HeadingComponent.propTypes = {
-  username: React.PropTypes.string,
   authenticated: React.PropTypes.bool.isRequired,
-  photo: React.PropTypes.string,
   signOut: React.PropTypes.func.isRequired,
+  username: React.PropTypes.string,
+  photo: React.PropTypes.string,
 };
 
 HeadingComponent.defaultProps = {
@@ -41,4 +33,5 @@ HeadingComponent.defaultProps = {
   photo: null,
 };
 
-export default connect(mapStateToProps, { signOut })(HeadingComponent);
+export default connect(state => state.auth, { signOut })(HeadingComponent);
+

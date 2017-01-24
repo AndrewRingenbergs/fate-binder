@@ -1,12 +1,24 @@
 import React from 'react';
 import Header from '../heading';
-import Login from '../login';
+import Tools from '../tools';
 
-export default class Root extends React.Component {
+class RootComponent extends React.Component {
   render() {
     return (<div>
       <Header />
-      <Login />
+      { this.props.children }
+      <Tools />
     </div>);
   }
 }
+
+RootComponent.propTypes = {
+  children: React.PropTypes.element,
+};
+
+RootComponent.defaultProps = {
+  children: {},
+};
+
+export default RootComponent;
+

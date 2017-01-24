@@ -8,6 +8,13 @@ import {
 } from './action-types';
 
 describe('Authentication Reducer', () => {
+  describe('unknown action', () => {
+    it('should return original state', () => {
+      const state = {some: 'value'};
+      const newState = authReducer(state, { type: 'Unknown' });
+      expect(state).toBe(state);
+    })
+  })
   describe('INIT_AUTH', () => {
     it('should set authenticated to false when payload is null', () => {
       const state = authReducer(undefined, {

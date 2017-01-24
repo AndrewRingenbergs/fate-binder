@@ -7,7 +7,7 @@
     "server": "webpack-dev-server --env dev",
     "start": "npm run server",
     "build": "webpack --env production",
-    "test": "jest",
+    "test": "jest --coverage",
     "test:watch": "jest --watch --notify",
     "deploy:prod": "npm run build && firebase deploy -P default --token=${FIREBASE_TOKEN}"
   },

@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import { push } from 'react-router-redux';
 import { firebaseAuth } from '../../firebase';
 import {
   INIT_AUTH,
@@ -31,6 +32,7 @@ function authenticate(provider) {
   return (dispatch) => {
     firebaseAuth.signInWithPopup(provider)
       .then(result => dispatch(signInSuccess(result)))
+      .then(() => dispatch(push('/')))
       .catch(error => dispatch(signInError(error)));
   };
 }
@@ -62,6 +64,7 @@ export function signInWithTwitter() {
 export function signOut() {
   return (dispatch) => {
     firebaseAuth.signOut()
-      .then(() => dispatch(signOutSuccess()));
+      .then(() => dispatch(signOutSuccess()))
+      .then(() => dispatch(push('/login')));
   };
 }

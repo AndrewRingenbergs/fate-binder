@@ -1,6 +1,7 @@
 import { applyMiddleware, compose, createStore } from 'redux';
-import { persistStore, autoRehydrate } from 'redux-persist';
+import { autoRehydrate } from 'redux-persist';
 import thunk from 'redux-thunk';
+import { routerMiddleware } from 'react-router-redux';
 
 import reducer from '../reducers';
 
@@ -11,16 +12,16 @@ const extraMiddleware = storeOptions.middleware || [];
 const NOOP = () => {};
 const postCreateStore = storeOptions.postCreateStore || NOOP;
 
-const createStoreWithMiddleware = compose(
-  applyMiddleware(thunk),
-  autoRehydrate(),
-  ...extraMiddleware,
-)(createStore);
 
-export default function configureStore() {
+export default function configureStore(browserHistory) {
+  const createStoreWithMiddleware = compose(
+    applyMiddleware(thunk),
+    autoRehydrate(),
+    applyMiddleware(routerMiddleware(browserHistory)),
+    ...extraMiddleware,
+  )(createStore);
+
   const store = createStoreWithMiddleware(reducer);
-
-  persistStore(store);
 
   postCreateStore(store);
 
