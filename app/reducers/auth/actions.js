@@ -29,12 +29,11 @@ export function signOutSuccess() {
 }
 
 function authenticate(provider) {
-  return (dispatch) => {
-    return firebaseAuth.signInWithPopup(provider)
+  return dispatch =>
+    firebaseAuth.signInWithPopup(provider)
       .then(result => dispatch(signInSuccess(result)))
       .then(() => dispatch(push('/')))
       .catch(error => dispatch(signInError(error)));
-  };
 }
 
 export function initAuth(user) {
@@ -62,9 +61,8 @@ export function signInWithTwitter() {
 }
 
 export function signOut() {
-  return (dispatch) => {
-    return firebaseAuth.signOut()
+  return dispatch =>
+    firebaseAuth.signOut()
       .then(() => dispatch(signOutSuccess()))
       .then(() => dispatch(push('/login')));
-  };
 }

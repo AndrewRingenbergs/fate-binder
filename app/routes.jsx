@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route } from 'react-router';
 import Root from './containers/root';
-import Login from './containers/login';
-import Home from './containers/home';
+import Login from './pages/login';
+import Home from './pages/home';
 
 function isLoggedIn(authState) {
   return authState.authenticated;
