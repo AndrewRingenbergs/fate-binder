@@ -30,7 +30,7 @@ export function signOutSuccess() {
 
 function authenticate(provider) {
   return (dispatch) => {
-    firebaseAuth.signInWithPopup(provider)
+    return firebaseAuth.signInWithPopup(provider)
       .then(result => dispatch(signInSuccess(result)))
       .then(() => dispatch(push('/')))
       .catch(error => dispatch(signInError(error)));
@@ -63,7 +63,7 @@ export function signInWithTwitter() {
 
 export function signOut() {
   return (dispatch) => {
-    firebaseAuth.signOut()
+    return firebaseAuth.signOut()
       .then(() => dispatch(signOutSuccess()))
       .then(() => dispatch(push('/login')));
   };
