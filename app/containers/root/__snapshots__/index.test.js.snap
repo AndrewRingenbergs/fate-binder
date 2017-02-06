@@ -1,9 +1,69 @@
-exports[`<App /> should contain the name of the application 1`] = `
+exports[`<App /> for desktop mode should match snapshot 1`] = `
 <div>
-  <Connect(HeadingComponent) />
-  <p>
-    Hello World
-  </p>
-  <DevTools />
+  <Sidebar
+    docked={true}
+    dragToggleDistance={30}
+    onSetOpen={[Function]}
+    open={false}
+    pullRight={false}
+    shadow={true}
+    sidebar={
+      <Menu
+        closeAction={[Function]}
+        showCloseButton={false} />
+    }
+    styles={
+      Object {
+        "sidebar": Object {
+          "backgroundColor": "#002b36",
+        },
+      }
+    }
+    touch={true}
+    touchHandleWidth={20}
+    transitions={true}>
+    <Connect(HeadingComponent)
+      menuAction={[Function]}
+      showMenuButton={false} />
+    <p>
+      Hello World
+    </p>
+    <DevTools />
+  </Sidebar>
+</div>
+`;
+
+exports[`<App /> for mobile mode should match snapshot 1`] = `
+<div>
+  <Sidebar
+    docked={true}
+    dragToggleDistance={30}
+    onSetOpen={[Function]}
+    open={false}
+    pullRight={false}
+    shadow={true}
+    sidebar={
+      <Menu
+        closeAction={[Function]}
+        showCloseButton={false} />
+    }
+    styles={
+      Object {
+        "sidebar": Object {
+          "backgroundColor": "#002b36",
+        },
+      }
+    }
+    touch={true}
+    touchHandleWidth={20}
+    transitions={true}>
+    <Connect(HeadingComponent)
+      menuAction={[Function]}
+      showMenuButton={false} />
+    <p>
+      Hello World
+    </p>
+    <DevTools />
+  </Sidebar>
 </div>
 `;

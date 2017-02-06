@@ -3,7 +3,7 @@
 }
 
 .username {
-  color: white
+  color: #839496;
 }
 
 .photo-span {
@@ -18,11 +18,11 @@
   }
 }
 
-
 :local(.home-menu) {
-  background: #2d3e50;
+  background: #002b36;
+  color: #839496;
 }
 
 :global(.pure-menu-heading) {
-  color: white;
+  color: #839496;
 }
