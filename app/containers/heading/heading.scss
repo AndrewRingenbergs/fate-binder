@@ -1,9 +1,11 @@
+@import '../../style-constants/colours';
+
 .profile-pic {
   border-radius: 50%;
 }
 
 .username {
-  color: #839496;
+  color: $text-inverse;
 }
 
 .photo-span {
@@ -19,10 +21,10 @@
 }
 
 :local(.home-menu) {
-  background: #002b36;
-  color: #839496;
+  background: $primary;
+  color: $text-inverse;
 }
 
 :global(.pure-menu-heading) {
-  color: #839496;
+  color: $text-inverse;
 }

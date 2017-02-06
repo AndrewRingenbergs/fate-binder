@@ -5,7 +5,7 @@ import { signOut } from '../../reducers/auth/actions';
 
 import IconButton from '../../components/iconButton';
 
-import css from './heading.css';
+import css from './heading.scss';
 
 @CSSModules(css)
 export class HeadingComponent extends React.Component {

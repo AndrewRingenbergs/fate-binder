@@ -84,7 +84,7 @@ exports.extractCSS = function(paths) {
   };
 }
 
-cssLoaderQuery = {
+const cssLoaderQuery = {
   module: true,
   camelCase: true,
   localIdentName: '[path][name]__[local]--[hash:base64:5]'
@@ -119,7 +119,7 @@ exports.inlineCSSModules = function(path) {
         use: [
           { loader: 'style-loader' },
           { loader: 'css-loader', query: cssLoaderQuery },
-          {loader: 'sass-loader'}
+          { loader: 'sass-loader' }
         ],
         include: path
       }]

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import IconButton from '../../components/iconButton';
-import css from './menu.css';
+import css from './menu.scss';
 
 
 export default class Menu extends React.Component {

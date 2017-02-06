@@ -15,7 +15,7 @@ exports[`<App /> for desktop mode should match snapshot 1`] = `
     styles={
       Object {
         "sidebar": Object {
-          "backgroundColor": "#002b36",
+          "backgroundColor": "darkPrimary",
         },
       }
     }
@@ -50,7 +50,7 @@ exports[`<App /> for mobile mode should match snapshot 1`] = `
     styles={
       Object {
         "sidebar": Object {
-          "backgroundColor": "#002b36",
+          "backgroundColor": "darkPrimary",
         },
       }
     }

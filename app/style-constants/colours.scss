@@ -1,0 +1,19 @@
+$primary: #009688;
+$dark-primary: #00796B;
+$light-primary: #B2DFDB;
+:export { primary: $primary }
+:export { dark-primary: $dark-primary }
+:export { light-primary: $light-primary }
+
+$accent: #FFC107;
+:export { accent: $accent }
+
+$text-inverse: #FFFFFF;
+:export { text-inverse: $text-inverse }
+
+$primary-text: #212121;
+$secondary-text: #757575;
+$divider: #BDBDBD
+:export { primary-text: $primary-text }
+:export { secondary-text: $secondary-text }
+:export { divider: $divider }

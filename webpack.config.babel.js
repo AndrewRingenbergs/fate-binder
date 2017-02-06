@@ -16,7 +16,7 @@ const PATHS = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'build'),
   styles: cssLibraries.map(l => path.join(__dirname, 'node_modules', l)),
-  globalStyles: path.join(__dirname, 'app', 'main.css')
+  globalStyles: path.join(__dirname, 'app', 'main.scss')
 }
 
 console.log(PATHS)
@@ -31,14 +31,13 @@ const COMMON = merge(
       path: PATHS.build
     },
     resolve: {
-      extensions: ['.js', '.jsx']
+      extensions: ['.js', '.jsx'],
     }
   },
   parts.fileLoader(),
   parts.setupBabel(PATHS.app));
 
 module.exports = function(env) {
-  console.log(`Building in Environment ${chalk.underline.yellow(env)}`);
   var nodeEnv = parts.setFreeVariable('process.env.NODE_ENV', env);
   process.env.BABEL_ENV = env;
 

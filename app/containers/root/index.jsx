@@ -5,6 +5,8 @@ import Header from '../heading';
 import Tools from '../tools';
 import Menu from '../menu';
 
+import colours from '../../style-constants/colours.scss';
+
 class RootComponent extends React.Component {
   constructor() {
     super();
@@ -40,7 +42,7 @@ class RootComponent extends React.Component {
         showCloseButton={!this.state.sidebarDocked}
         closeAction={this.onToggleSidebar}
       />);
-    const backgroundColor = '#002b36';
+    const backgroundColor = colours.darkPrimary;
     return (<div>
       <Sidebar
         sidebar={sidebarContent}
