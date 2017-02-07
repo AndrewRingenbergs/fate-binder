@@ -33,12 +33,12 @@ class RootComponent extends React.Component {
     this.setState({ sidebarOpen: !this.state.sidebarOpen });
   }
 
-  mediaQueryChanged() {
-    this.setState({ sidebarDocked: this.state.mql.matches });
+  setOpen(sidebarOpen) {
+    this.setState({ sidebarOpen });
   }
 
-  setOpen(sidebarOpen) {
-    this.setState({sidebarOpen});
+  mediaQueryChanged() {
+    this.setState({ sidebarDocked: this.state.mql.matches });
   }
 
   render() {
