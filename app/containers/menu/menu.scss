@@ -1,6 +1,60 @@
 @import '../../style-constants/colours';
+@import '../../style-constants/dimins';
+@import '../../main';
+
+.menu-items {
+  list-style-type: none;
+  padding: 0px;
+  list-style-type: none;
+  margin: 0px;
+
+  li {
+    border-bottom: 1px solid $divider-dark;
+  }
+
+  .menu-button {
+    @extend .no-button;
+    text-size: 1.5em;
+    line-height: 3em;
+    width: 100%;
+    text-align: left;
+    padding-left: 8px;
+  }
+}
+
+.divider {
+  border-top: 1px solid #8c8b8b;
+  border-bottom: 1px solid #fff;
+}
+
+.top-section {
+  background: $dark-primary;
+  height: $top-bar-height;
+
+  .title {
+    font-size: 1.5em;
+  }
+
+  .profile {
+    padding-top: $top-bar-height - 50px - 4px;
+    line-height: 50px;
+    height: 50px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .profile-pic {
+    border-radius: 50%;
+    float: right;
+  }
+}
 
 .menu {
-  width: 256px;
+  width: $menu-width;
   color: $text-inverse;
 }
+
+.title {
+  text-size: 1.5em;
+}
+

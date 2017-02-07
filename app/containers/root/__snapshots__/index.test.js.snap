@@ -8,21 +8,21 @@ exports[`<App /> for mobile mode should match snapshot 1`] = `
     pullRight={false}
     shadow={true}
     sidebar={
-      <Menu
+      <Connect(MenuComponant)
         closeAction={[Function]}
         showCloseButton={true} />
     }
     styles={
       Object {
         "sidebar": Object {
-          "backgroundColor": "darkPrimary",
+          "backgroundColor": "menu",
         },
       }
     }
     touch={true}
     touchHandleWidth={20}
     transitions={true}>
-    <Connect(HeadingComponent)
+    <HeadingComponent
       menuAction={[Function]}
       showMenuButton={true} />
     <p>
@@ -43,21 +43,21 @@ exports[`a 1`] = `
     pullRight={false}
     shadow={true}
     sidebar={
-      <Menu
+      <Connect(MenuComponant)
         closeAction={[Function]}
         showCloseButton={false} />
     }
     styles={
       Object {
         "sidebar": Object {
-          "backgroundColor": "darkPrimary",
+          "backgroundColor": "menu",
         },
       }
     }
     touch={true}
     touchHandleWidth={20}
     transitions={true}>
-    <Connect(HeadingComponent)
+    <HeadingComponent
       menuAction={[Function]}
       showMenuButton={false} />
     <p>

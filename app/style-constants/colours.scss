@@ -13,7 +13,11 @@ $text-inverse: #FFFFFF;
 
 $primary-text: #212121;
 $secondary-text: #757575;
-$divider: #BDBDBD
+$divider: #BDBDBD;
+$divider-dark: #424242;
 :export { primary-text: $primary-text }
 :export { secondary-text: $secondary-text }
 :export { divider: $divider }
+
+$menu: #263238;
+:export { menu: $menu }

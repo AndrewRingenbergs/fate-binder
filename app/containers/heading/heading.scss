@@ -1,28 +1,10 @@
 @import '../../style-constants/colours';
-
-.profile-pic {
-  border-radius: 50%;
-}
-
-.username {
-  color: $text-inverse;
-}
-
-.photo-span {
-  height: 40px;
-}
-
-:local(.user-display) {
-  float: right;
-  > span {
-    display: block;
-    text-align: center;
-  }
-}
+@import '../../style-constants/dimins';
 
 :local(.home-menu) {
   background: $primary;
   color: $text-inverse;
+  heiht: $top-bar-height;
 }
 
 :global(.pure-menu-heading) {

@@ -47,7 +47,7 @@ class RootComponent extends React.Component {
         showCloseButton={!this.state.sidebarDocked}
         closeAction={this.onToggleSidebar}
       />);
-    const backgroundColor = colours.darkPrimary;
+    const backgroundColor = colours.menu;
     return (<div>
       <Sidebar
         sidebar={sidebarContent}
