@@ -19,7 +19,7 @@ export default function authReducer(state = DefaultAuthState, { payload, type })
     case SIGN_IN_SUCCESS:
       return {
         ...state,
-        authenticated: !!payload,
+        authenticated: !!payload && payload.uid != null,
         id: payload ? payload.uid : null,
         username: payload ? payload.displayName : null,
         photo: payload ? payload.photoURL : null,

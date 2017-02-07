@@ -22,11 +22,6 @@ export default class Menu extends React.Component {
 }
 
 Menu.propTypes = {
-  showCloseButton: React.PropTypes.bool,
-  closeAction: React.PropTypes.func,
-};
-
-Menu.defaultProps = {
-  showCloseButton: false,
-  closeAction: () => {},
+  showCloseButton: React.PropTypes.bool.isRequired,
+  closeAction: React.PropTypes.func.isRequired,
 };

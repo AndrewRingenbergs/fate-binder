@@ -40,6 +40,17 @@ describe('Authentication Reducer', () => {
       expect(state.username).toBe('Someone');
       expect(state.photo).toBe('http://photo.jpg');
     });
+
+    it('should null all values if no payload provided', () => {
+      const state = authReducer(undefined, {
+        type: INIT_AUTH,
+      });
+
+      expect(state.authenticated).toBe(false);
+      expect(state.id).toBe(null);
+      expect(state.username).toBe(null);
+      expect(state.photo).toBe(null);
+    });
   });
 
   describe('SIGN_IN_SUCCESS', () => {

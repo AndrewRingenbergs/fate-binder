@@ -12,7 +12,7 @@ export class HeadingComponent extends React.Component {
   render() {
     const message = 'Roll for Initiative';
     const photo = this.props.photo ? <img className={css.profilePic} src={this.props.photo} alt="profile" width="35" height="35" /> : null;
-    const logoutButton = <button onClick={this.props.signOut}>Logout</button>;
+    const logoutButton = <button id="logout-button" onClick={this.props.signOut}>Logout</button>;
     const openButton = this.props.showMenuButton ? (
       <IconButton
         faClass="fa-bars"

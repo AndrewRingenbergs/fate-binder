@@ -1,7 +1,7 @@
-exports[`<App /> for desktop mode should match snapshot 1`] = `
+exports[`<App /> for mobile mode should match snapshot 1`] = `
 <div>
   <Sidebar
-    docked={true}
+    docked={false}
     dragToggleDistance={30}
     onSetOpen={[Function]}
     open={false}
@@ -10,7 +10,7 @@ exports[`<App /> for desktop mode should match snapshot 1`] = `
     sidebar={
       <Menu
         closeAction={[Function]}
-        showCloseButton={false} />
+        showCloseButton={true} />
     }
     styles={
       Object {
@@ -24,7 +24,7 @@ exports[`<App /> for desktop mode should match snapshot 1`] = `
     transitions={true}>
     <Connect(HeadingComponent)
       menuAction={[Function]}
-      showMenuButton={false} />
+      showMenuButton={true} />
     <p>
       Hello World
     </p>
@@ -33,7 +33,7 @@ exports[`<App /> for desktop mode should match snapshot 1`] = `
 </div>
 `;
 
-exports[`<App /> for mobile mode should match snapshot 1`] = `
+exports[`a 1`] = `
 <div>
   <Sidebar
     docked={true}
