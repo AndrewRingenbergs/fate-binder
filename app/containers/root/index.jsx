@@ -16,6 +16,7 @@ class RootComponent extends React.Component {
     };
     this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
     this.onToggleSidebar = this.onToggleSidebar.bind(this);
+    this.setOpen = this.setOpen.bind(this);
   }
 
   componentWillMount() {
@@ -36,6 +37,10 @@ class RootComponent extends React.Component {
     this.setState({ sidebarDocked: this.state.mql.matches });
   }
 
+  setOpen(sidebarOpen) {
+    this.setState({sidebarOpen});
+  }
+
   render() {
     const sidebarContent = (
       <Menu
@@ -49,6 +54,7 @@ class RootComponent extends React.Component {
         open={this.state.sidebarOpen}
         docked={this.state.sidebarDocked}
         styles={{ sidebar: { backgroundColor } }}
+        onSetOpen={this.setOpen}
       >
         <Header
           showMenuButton={!this.state.sidebarDocked}

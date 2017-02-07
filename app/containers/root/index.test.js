@@ -69,4 +69,20 @@ describe('<App />', ()=>{
     app.find('Sidebar').props().sidebar.props.closeAction();
     expect(app.find('Sidebar').props().open).toEqual(false)
   });
+
+  it('should open and close the sidebar by dragging', () => {
+    matchMedia.matches = false;
+
+    const app = shallow(<App><p>Hello World</p></App>);
+    expect(app.find('Sidebar').props().docked).toEqual(false)
+    expect(app.find('Sidebar').props().open).toEqual(false)
+
+    app.find('Sidebar').props().onSetOpen(true);
+
+    expect(app.find('Sidebar').props().open).toEqual(true)
+
+    app.find('Sidebar').props().onSetOpen(false);
+
+    expect(app.find('Sidebar').props().open).toEqual(false)
+  });
 });
