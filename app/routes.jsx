@@ -21,7 +21,7 @@ function transitionTo(page) {
 }
 
 export default function routes(authFunction) {
-  const loggedInCheck = authFunction(isLoggedIn, transitionTo('/home'));
+  const loggedInCheck = authFunction(isLoggedIn, transitionTo('/'));
   const loggedOutCheck = authFunction(isLoggedOut, transitionTo('/login'));
 
   return (

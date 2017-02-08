@@ -7,15 +7,15 @@ const pkg = require('./package.json');
 const parts = require('./webpack/webpack.parts');
 
 const cssLibraries = [
-  'purecss',
-  path.join('font-awesome', 'css','font-awesome.min.css')
+  path.join('react-mdl', 'extra', 'css', 'material.teal-amber.min.css'),
+  path.join('font-awesome', 'css','font-awesome.min.css'),
 ];
 
 const PATHS = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'build'),
   styles: cssLibraries.map(l => path.join(__dirname, 'node_modules', l)),
-  globalStyles: path.join(__dirname, 'app', 'main.scss')
+  globalStyles: [path.join(__dirname, 'app', 'styles', 'index.scss'), path.join(__dirname, 'app', 'styles', 'material-icons', 'index.scss')],
 }
 
 console.log(PATHS)
@@ -23,7 +23,7 @@ console.log(PATHS)
 const COMMON = merge(
   {
     entry: {
-      app: [PATHS.globalStyles, PATHS.app],
+      app: [...PATHS.globalStyles, PATHS.app],
     },
     output: {
       filename: '[name].js',
@@ -33,7 +33,8 @@ const COMMON = merge(
       extensions: ['.js', '.jsx'],
     }
   },
-  parts.fileLoader(),
+  //parts.fileLoader(),
+  parts.setupFonts(),
   parts.setupBabel(PATHS.app));
 
 module.exports = function(env) {
@@ -57,6 +58,10 @@ module.exports = function(env) {
           publicPath: ''
         }
       }
+      const libs = Object.keys(pkg.dependencies)
+        .filter(p => base.resolve.alias[p] == undefined && p !== 'font-awesome' );
+
+      libs.push('react-mdl/extra/material')
 
       return merge({ entry: { app: PATHS.styles } },
         COMMON,
@@ -65,7 +70,7 @@ module.exports = function(env) {
         nodeEnv,
         parts.extractBundle({
           name: 'vendor',
-          entries: Object.keys(pkg.dependencies).filter(p => base.resolve.alias[p] == undefined && p !== 'font-awesome' )
+          entries: libs,
         }),
         parts.minify(),
         parts.eslint(PATHS.app),

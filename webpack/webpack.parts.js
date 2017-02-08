@@ -45,6 +45,48 @@ exports.setupBabel = function(paths) {
   }
 }
 
+exports.setupFonts = function() {
+  const name = "[name].[hash:8].[ext]";
+  const limit = 65000;
+
+  const query = { name, limit };
+  return {
+    module: {
+      rules: [{
+        test: /\.svg$/,
+        loader: [{ loader: 'url-loader', query: {
+          ... query,
+          mimetype: 'image/svg+xml'
+        }}]
+      }, {
+        test: /\.[ot]tf$/,
+        loader: [{ loader: 'url-loader', query: {
+          ... query,
+          mimetype: 'application/octet-stream'
+        }}]
+      }, {
+        test: /\.woff$/,
+        loader: [{ loader: 'url-loader', query: {
+          ... query,
+          mimetype: 'application/font-woff'
+        }}]
+      }, {
+        test: /\.woff2$/,
+        loader: [{ loader: 'url-loader', query: {
+          ... query,
+          mimetype: 'application/font-woff2'
+        }}]
+      }, {
+        test: /\.eot$/,
+        loader: [{ loader: 'url-loader', query: {
+          ... query,
+          mimetype: 'application/vnd.ms-fontobject'
+        }}]
+      }]
+    }
+  }
+}
+
 exports.extractBundle = function(options) {
   const entry = {};
   entry[options.name] = options.entries;

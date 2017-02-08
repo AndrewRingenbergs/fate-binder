@@ -13,7 +13,8 @@
   ],
   "rules": {
     "indent": [1, 2, {"SwitchCase": 1}],
-    "react/prefer-stateless-function": 0
+    "react/prefer-stateless-function": 0,
+    "no-unused-vars": ["error", {"varsIgnorePattern": "_.*", "ignoreRestSiblings": true}]
   }
 }
 

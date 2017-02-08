@@ -1,79 +1,48 @@
 import React from 'react';
-import Sidebar from 'react-sidebar';
+import { connect } from 'react-redux';
 
-import Header from '../heading';
+import { Header, Layout, Drawer, Content, Navigation } from 'react-mdl';
+
 import Tools from '../tools';
-import Menu from '../menu';
+import MenuItem from '../../components/menu/menuItem';
 
-import colours from '../../style-constants/colours.scss';
+import { signOut } from '../../reducers/auth/actions';
 
 class RootComponent extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      sideBarOpen: false,
-      sideBarDocked: false,
-    };
-    this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
-    this.onToggleSidebar = this.onToggleSidebar.bind(this);
-    this.setOpen = this.setOpen.bind(this);
-  }
-
-  componentWillMount() {
-    const mql = window.matchMedia('(min-width: 800px)');
-    mql.addListener(this.mediaQueryChanged);
-    this.setState({ mql, sidebarDocked: mql.matches });
-  }
-
-  componentWillUnmount() {
-    this.state.mql.removeListener(this.mediaQueryChanged);
-  }
-
-  onToggleSidebar() {
-    this.setState({ sidebarOpen: !this.state.sidebarOpen });
-  }
-
-  setOpen(sidebarOpen) {
-    this.setState({ sidebarOpen });
-  }
-
-  mediaQueryChanged() {
-    this.setState({ sidebarDocked: this.state.mql.matches });
-  }
-
   render() {
-    const sidebarContent = (
-      <Menu
-        showCloseButton={!this.state.sidebarDocked}
-        closeAction={this.onToggleSidebar}
-      />);
-    const backgroundColor = colours.menu;
-    return (<div>
-      <Sidebar
-        sidebar={sidebarContent}
-        open={this.state.sidebarOpen}
-        docked={this.state.sidebarDocked}
-        styles={{ sidebar: { backgroundColor } }}
-        onSetOpen={this.setOpen}
-      >
-        <Header
-          showMenuButton={!this.state.sidebarDocked}
-          menuAction={this.onToggleSidebar}
-        />
-        { this.props.children }
-        <Tools />
-      </Sidebar>
-    </div>);
+    const { children, logout, ..._otherProps } = this.props;
+    return (
+      <Layout fixedDrawer fixedHeader >
+        <Header title="Title">
+          <Navigation />
+        </Header>
+        <Drawer title="Title">
+          <Navigation>
+            <MenuItem title="Logout" action={logout} />
+            <a>Logout</a>
+          </Navigation>
+        </Drawer>
+        <Content>
+          { children }
+          <Tools />
+        </Content>
+      </Layout>
+    );
   }
 }
 
 RootComponent.propTypes = {
   children: React.PropTypes.element,
+  logout: React.PropTypes.func,
 };
+
+const NO_OP = () => {};
 
 RootComponent.defaultProps = {
   children: {},
+  logout: NO_OP,
 };
 
-export default RootComponent;
+
+export default connect(state => state, { signOut })(RootComponent);
 

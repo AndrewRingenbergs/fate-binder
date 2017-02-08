@@ -18,9 +18,9 @@ export class LoginComponent extends React.Component {
     const error = this.props.loginError;
 
     return (
-      <div className={`pure-g ${css.signInForm}`}>
-        <h1 className={`pure-u-1-1 ${css.signInHeading}`}>Sign in</h1>
-        <h3 className={`pure-u-1-1 ${css.signInError}`}> {error} </h3>
+      <div className={`mdl-grid ${css.signInForm}`}>
+        <h1 className={`mdl-cell mdl-cell--12-col ${css.signInHeading}`}>Sign in</h1>
+        <h3 className={`mdl-cell mdl-cell--12-col ${css.signInError}`}> {error} </h3>
         {
           buttons.map(provider =>
             <LoginButton
