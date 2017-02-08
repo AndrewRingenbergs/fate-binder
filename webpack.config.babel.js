@@ -15,7 +15,10 @@ const PATHS = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'build'),
   styles: cssLibraries.map(l => path.join(__dirname, 'node_modules', l)),
-  globalStyles: [path.join(__dirname, 'app', 'styles', 'index.scss'), path.join(__dirname, 'app', 'styles', 'material-icons', 'index.scss')],
+  globalStyles: [
+    path.join(__dirname, 'app', 'styles', 'material-icons', 'index.scss'),
+    path.join(__dirname, 'app', 'styles', 'index.scss'),
+  ],
 }
 
 console.log(PATHS)
@@ -23,7 +26,7 @@ console.log(PATHS)
 const COMMON = merge(
   {
     entry: {
-      app: [...PATHS.globalStyles, PATHS.app],
+      app: [PATHS.app, ...PATHS.globalStyles],
     },
     output: {
       filename: '[name].js',

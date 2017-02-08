@@ -8,7 +8,7 @@ export default class MenuItem extends React.Component {
   render() {
     const { title, action, ..._otherProps } = this.props;
     return (
-      <Button ripple className={css.navButton} onClick={action}>
+      <Button ripple onClick={action} className={css.navButton}>
         {title}
       </Button>
     );
