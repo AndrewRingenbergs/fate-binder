@@ -8,7 +8,6 @@ const parts = require('./webpack/webpack.parts');
 
 const cssLibraries = [
   'purecss',
-  path.join('purecss', 'build','grids-responsive-min.css'),
   path.join('font-awesome', 'css','font-awesome.min.css')
 ];
 

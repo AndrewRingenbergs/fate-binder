@@ -1,13 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CSSModules from 'react-css-modules';
 
 import { signOut } from '../../reducers/auth/actions';
 
 import IconButton from '../../components/iconButton';
 import css from './menu.scss';
 
-@CSSModules(css)
 export class MenuComponant extends React.Component {
   render() {
     const photo = this.props.authState.photo ?
@@ -21,9 +19,9 @@ export class MenuComponant extends React.Component {
       />) :
       null;
 
-    const signOut = () => {
-      this.props.signOut().then(() => this.props.closeAction());
-    }
+    const logout = () => {
+      this.props.logoutAction().then(() => this.props.closeAction());
+    };
 
     return (
       <div className={css.menu}>
@@ -36,7 +34,7 @@ export class MenuComponant extends React.Component {
         </div>
         <div>
           <ul className={css.menuItems}>
-            <li><button id="logout-button" onClick={signOut} className={css.menuButton}>Logout</button></li>
+            <li><button id="logout-button" onClick={logout} className={css.menuButton}>Logout</button></li>
           </ul>
         </div>
       </div>);
@@ -55,6 +53,7 @@ MenuComponant.propTypes = {
 
 MenuComponant.defaultProps = {
   authState: {},
+  logoutAction: () => {},
 };
 
 function mapStateToProps(state) {
