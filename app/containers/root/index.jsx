@@ -20,8 +20,12 @@ class RootComponent extends React.Component {
             <MenuItem title="Logout" action={logout} />
           </Navigation>
         </Drawer>
-        <Content>
-          { children }
+        <Content className="mdl-color--grey-100">
+          <div className="mdl-grid">
+            <div className="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+              { children }
+            </div>
+          </div>
           <Tools />
         </Content>
       </Layout>
