@@ -34,6 +34,9 @@ const COMMON = merge(
     },
     resolve: {
       extensions: ['.js', '.jsx'],
+      alias: {
+        'react-redux-firebase': path.join(__dirname, 'node_modules', 'react-redux-firebase', 'dist', 'index.js')
+      }
     }
   },
   //parts.fileLoader(),

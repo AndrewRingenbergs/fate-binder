@@ -1,6 +1,5 @@
 import React from 'react';
-import { persistStore } from 'redux-persist';
-
+import { persistStore } from 'redux-persist-immutable';
 
 class AppWrapper extends React.Component {
   constructor() {
@@ -9,9 +8,11 @@ class AppWrapper extends React.Component {
   }
 
   componentWillMount() {
-    persistStore(this.props.store, { blacklist: ['routing'] }, () => {
-      this.setState({ rehydrated: true });
-    });
+    persistStore(this.props.store, {
+      transforms: [],
+      blacklist: ['routing', 'firebase'] }, () => {
+        this.setState({ rehydrated: true });
+      });
   }
 
   render() {

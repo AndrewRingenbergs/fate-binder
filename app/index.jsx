@@ -12,11 +12,16 @@ import configureStore from './store';
 import routes from './routes';
 
 const store = configureStore(browserHistory);
-const syncedHistory = syncHistoryWithStore(browserHistory, store);
+const syncedHistory = syncHistoryWithStore(browserHistory, store, {
+  selectLocationState(state) {
+    return state.get('routing').toJS();
+  },
+});
 
 function bindCheckAuth(redux) {
   return (check, handler) => (nextState, transition) => {
-    const authState = redux.getState().auth;
+    const firebase = redux.getState().get('firebase');
+    const authState = firebase.get('auth');
     if (check(authState)) {
       handler(nextState, transition);
     }

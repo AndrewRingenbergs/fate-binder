@@ -1,9 +1,10 @@
-import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
+import { combineReducers } from 'redux-immutable';
+import { firebaseStateReducer } from 'react-redux-firebase';
 
-import authReducer from './auth/reducer';
+import routing from './routing';
 
 export default combineReducers({
-  auth: authReducer,
-  routing: routerReducer,
+  firebase: firebaseStateReducer,
+  routing,
 });
+

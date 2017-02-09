@@ -1,33 +1,35 @@
 import React from 'react';
 import { Route } from 'react-router';
+
+import { UserAuthWrapper } from 'redux-auth-wrapper';
+
 import Root from './containers/root';
 import Login from './pages/login';
 import Home from './pages/home';
 
-function isLoggedIn(authState) {
-  return authState.authenticated;
-}
+export const UserIsAuthenticated = UserAuthWrapper({
+  wrapperDisplayName: 'UserIsAuthenticated',
+  failureRedirectPath: '/login',
+  authSelector: state => state.getIn(['firebase', 'auth']),
+  authenticatingSelector: state => state.getIn(['firebase', 'isInitializing']) === true,
+  predicate: auth => auth !== null,
+});
 
-function isLoggedOut(authState) {
-  return !isLoggedIn(authState);
-}
+export const UserIsNotAuthenticated = UserAuthWrapper({
+  wrapperDisplayName: 'UserIsNotAuthenticated',
+  allowRedirectBack: false,
+  failureRedirectPath: '/',
+  authSelector: state => state.getIn(['firebase', 'auth']),
+  authenticatingSelector: state => state.getIn(['firebase', 'isInitializing']) === true,
+  predicate: auth => auth === null,
+});
 
-function transitionTo(page) {
-  return (nextState, transition) => {
-    transition(page, {
-      next: nextState.location.pathname,
-    });
-  };
-}
 
-export default function routes(authFunction) {
-  const loggedInCheck = authFunction(isLoggedIn, transitionTo('/'));
-  const loggedOutCheck = authFunction(isLoggedOut, transitionTo('/login'));
-
+export default function routes() {
   return (
     <Route path="" component={Root}>
-      <Route path="/login" component={Login} onEnter={loggedInCheck} />
-      <Route path="/" component={Home} onEnter={loggedOutCheck} />
+      <Route path="/login" component={UserIsNotAuthenticated(Login)} />
+      <Route path="/" component={UserIsAuthenticated(Home)} />
     </Route>
   );
 }

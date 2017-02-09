@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { firebaseConnect } from 'react-redux-firebase';
 
 import * as authActions from '../../reducers/auth/actions';
 
@@ -47,8 +48,4 @@ LoginComponent.defaultProps = {
   loginError: null,
 };
 
-function mapStateToProps(state) {
-  return { loginError: state.auth.error };
-}
-
-export default connect(mapStateToProps, authActions)(LoginComponent);
+export default connect(state => state, authActions)(firebaseConnect()(LoginComponent));
