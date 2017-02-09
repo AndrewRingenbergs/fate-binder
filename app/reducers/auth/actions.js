@@ -15,7 +15,11 @@ export function logout() {
 function authenticateWith(provider) {
   return (dispatch, _, getFirebase) => {
     getFirebase().login({ provider, type: 'popup' })
-      .then(() => dispatch(push('/')));
+      .then(() => dispatch(push('/')))
+      .catch((err) => {
+        const message = err.message || 'Unknown Error';
+        dispatch({ type: 'ERROR', payload: { message } });
+      });
   };
 }
 

@@ -48,4 +48,9 @@ LoginComponent.defaultProps = {
   loginError: null,
 };
 
-export default connect(state => state, authActions)(firebaseConnect()(LoginComponent));
+function mapStateToProps() {
+  return {};
+}
+
+export default firebaseConnect()(connect(mapStateToProps, authActions)(LoginComponent));
+

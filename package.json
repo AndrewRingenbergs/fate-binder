@@ -68,6 +68,8 @@
     "firebase": "^3.6.5",
     "font-awesome": "^4.7.0",
     "immutable": "^3.8.1",
+    "install": "^0.8.7",
+    "npm": "^4.1.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-lite": "^0.15.30",
@@ -82,7 +84,8 @@
     "redux-immutable": "^3.0.11",
     "redux-persist-immutable": "^4.2.0",
     "redux-persist-transform-immutable": "^4.2.0",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "uuid": "^3.0.1"
   },
   "jest": {
     "moduleNameMapper": {
