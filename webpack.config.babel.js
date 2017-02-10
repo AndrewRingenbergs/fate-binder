@@ -45,11 +45,10 @@ const COMMON = merge(
   parts.setupFonts(),
   parts.setupBabel(PATHS.app));
 
-
-
-module.exports = function(env) {
+function config(env) {
   var nodeEnv = parts.setFreeVariable('process.env.NODE_ENV', env);
   process.env.BABEL_ENV = env;
+  const reactToolbox = path.join(__dirname, 'node_modules', 'react-toolbox');
 
   switch(env) {
     case 'production':
@@ -70,6 +69,7 @@ module.exports = function(env) {
       const libs = Object.keys(pkg.dependencies)
         .filter(p => base.resolve.alias[p] == undefined && p !== 'font-awesome' );
 
+
       return merge({ entry: { app: PATHS.styles } },
         COMMON,
         base,
@@ -79,7 +79,7 @@ module.exports = function(env) {
         parts.minify(),
         parts.eslint(PATHS.app),
         parts.extractCSSModules(PATHS.app),
-        parts.extractCSS(PATHS.styles),
+        parts.extractCSS([ ...PATHS.styles,  reactToolbox]),
         parts.htmlTemplate({title: 'Roll for Initiative'}),
       );
     case 'dev':
@@ -94,13 +94,16 @@ module.exports = function(env) {
         nodeEnv,
         parts.progress(),
         parts.eslint(PATHS.app),
+        parts.inlineCSS(PATHS.app),
+        parts.extractCSS([ ...PATHS.styles,  reactToolbox]),
         parts.htmlTemplate({
           title: 'Roll for Initiative - Dev Server',
           devServer: 'http://localhost:3000'
         }),
-        parts.inlineCSSModules(PATHS.app),
-        parts.extractCSS(PATHS.styles),
         parts.devServer({port: 3000})
       );
   }
 }
+
+
+module.exports = config

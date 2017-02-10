@@ -4,6 +4,8 @@ import { firebaseConnect } from 'react-redux-firebase';
 
 import { List } from 'immutable';
 
+import AppBar from 'react-toolbox/lib/app_bar';
+
 import Tools from '../tools';
 import MenuItem from '../../components/menu/menuItem';
 import MenuTitle from '../../components/menu/menuTitle';
@@ -16,7 +18,7 @@ class RootComponent extends React.Component {
     const { children, logoutAction, username, photo, ..._otherProps } = this.props;
     return (
       <div>
-        <h1>Roll for Initiative</h1>
+        <AppBar title={"Roll for Initiative"} />
         <MenuTitle username={username} photo={photo} />
         <MenuItem title="Logout" action={logoutAction} />
         { children }
