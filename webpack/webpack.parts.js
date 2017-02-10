@@ -6,263 +6,303 @@ const HtmlWebpackTemplate = require('html-webpack-template');
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const NyanProgressPlugin = require('nyan-progress-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 const _ = require('lodash');
 
 // -------------- building ---------------
 exports.htmlTemplate = function(options) {
-  let pluginOptions = {
-    title: options.title || 'New App',
-    template: HtmlWebpackTemplate,
-    inject: false,
-    appMountId: 'root',
-    meta: [
-      {name: "viewport" ,
-      content: "width=device-width, initial-scale=1"}
-    ]
-  };
+	let pluginOptions = {
+		title: options.title || 'New App',
+		template: HtmlWebpackTemplate,
+		inject: false,
+		appMountId: 'root',
+		meta: [
+			{name: "viewport" ,
+				content: "width=device-width, initial-scale=1"}
+		]
+	};
 
-  if(options.devServer) {
-    pluginOptions.devServer = options.devServer
-  }
+	if(options.devServer) {
+		pluginOptions.devServer = options.devServer
+	}
 
-  return {
-    plugins: [
-      new HTMLWebpackPlugin(pluginOptions)
-    ]
-  }
+	return {
+		plugins: [
+			new HTMLWebpackPlugin(pluginOptions)
+		]
+	}
 }
 
 exports.setupBabel = function(paths) {
-  return {
-    module: {
-      rules: [{
-        test: /\.(js|jsx)$/,
-        use: 'babel-loader',
-        include: paths,
-      }]
-    }
-  }
+	return {
+		module: {
+			rules: [{
+				test: /\.(js|jsx)$/,
+				use: 'babel-loader',
+				include: paths,
+			}]
+		}
+	}
 }
 
 exports.setupFonts = function() {
-  const name = "[name].[hash:8].[ext]";
-  const limit = 65000;
+	const name = "[name].[hash:8].[ext]";
+	const limit = 65000;
 
-  const query = { name, limit };
-  return {
-    module: {
-      rules: [{
-        test: /\.svg$/,
-        loader: [{ loader: 'url-loader', query: {
-          ... query,
-          mimetype: 'image/svg+xml'
-        }}]
-      }, {
-        test: /\.[ot]tf$/,
-        loader: [{ loader: 'url-loader', query: {
-          ... query,
-          mimetype: 'application/octet-stream'
-        }}]
-      }, {
-        test: /\.woff$/,
-        loader: [{ loader: 'url-loader', query: {
-          ... query,
-          mimetype: 'application/font-woff'
-        }}]
-      }, {
-        test: /\.woff2$/,
-        loader: [{ loader: 'url-loader', query: {
-          ... query,
-          mimetype: 'application/font-woff2'
-        }}]
-      }, {
-        test: /\.eot$/,
-        loader: [{ loader: 'url-loader', query: {
-          ... query,
-          mimetype: 'application/vnd.ms-fontobject'
-        }}]
-      }]
-    }
-  }
+	const query = { name, limit };
+	return {
+		module: {
+			rules: [{
+				test: /\.svg$/,
+				loader: [{ loader: 'url-loader', query: {
+					... query,
+					mimetype: 'image/svg+xml'
+				}}]
+			}, {
+				test: /\.[ot]tf$/,
+				loader: [{ loader: 'url-loader', query: {
+					... query,
+					mimetype: 'application/octet-stream'
+				}}]
+			}, {
+				test: /\.woff$/,
+				loader: [{ loader: 'url-loader', query: {
+					... query,
+					mimetype: 'application/font-woff'
+				}}]
+			}, {
+				test: /\.woff2$/,
+				loader: [{ loader: 'url-loader', query: {
+					... query,
+					mimetype: 'application/font-woff2'
+				}}]
+			}, {
+				test: /\.eot$/,
+				loader: [{ loader: 'url-loader', query: {
+					... query,
+					mimetype: 'application/vnd.ms-fontobject'
+				}}]
+			}]
+		}
+	}
+}
+
+function isVendor(module, count) {
+	const context = module.context;
+	console.log(content)
+	return context && context.indexOf('node_modules') >= 0;
+}
+
+exports.extractVendor = function(name) {
+	return {
+		plugins: [
+			new webpack.optimize.CommonsChunkPlugin({
+				name: 'vendor',
+				minChunks: function (module) {
+					function check(module) {
+						return module.context &&
+							module.context.indexOf('node_modules') !== -1;
+					}
+					console.log(module.context, check(module));
+					return check(module);
+				}
+			})
+		]
+	}
 }
 
 exports.extractBundle = function(options) {
-  const entry = {};
-  entry[options.name] = options.entries;
+	const entry = {};
+	entry[options.name] = options.entries;
 
-  console.log(chalk.underline(`Packageing in ${chalk.cyan(options.name)}`));
-  console.log(_.chain(options.entries)
-    .map(e => `  - ${e}`)
-    .join('\n')
-    .value()
-  );
+	// console.log(chalk.underline(`Packageing in ${chalk.cyan(options.name)}`));
+	// console.log(_.chain(options.entries)
+	//   .map(e => `  - ${e}`)
+	//   .join('\n')
+	//   .value()
+	// );
 
-  return {
-    entry: entry,
-    plugins: [
-      new webpack.optimize.CommonsChunkPlugin({
-        names: [options.name, 'manifest'],
-      })
-    ]
-  };
+	return {
+		entry: entry,
+		plugins: [
+			new webpack.optimize.CommonsChunkPlugin({
+				names: [options.name, 'manifest'],
+				minChunk: (module, count) => {
+					console.log(module);
+					return true;
+				},
+			})
+		]
+	};
 }
 
 exports.extractCSS = function(paths) {
-  return {
-    module: {
-      rules: [{
-        test: /\.(css)$/,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader',
-        }),
-        include: paths
-      }]
-    },
-    plugins: [
-      new ExtractTextPlugin('[name].[chunkhash:8].css')
-    ]
-  };
+	return {
+		module: {
+			rules: [{
+				test: /\.(css)$/,
+				loader: ExtractTextPlugin.extract({
+					fallbackLoader: 'style-loader',
+					loader: 'css-loader',
+				}),
+				include: paths
+			}]
+		},
+		plugins: [
+			new ExtractTextPlugin('[name].[chunkhash:8].css')
+		]
+	};
 }
 
 const cssLoaderQuery = {
-  module: true,
-  camelCase: true,
-  localIdentName: '[path][name]__[local]--[hash:base64:5]'
+	module: true,
+	camelCase: true,
+	localIdentName: '[path][name]__[local]--[hash:base64:5]'
 }
 
 exports.extractCSSModules = function(paths) {
-  return {
-    module: {
-      rules: [{
-        test: /\.(css|scss)$/,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: [
-            {loader: 'css-loader', query: cssLoaderQuery},
-            {loader: 'sass-loader'}
-          ]
-        }),
-        include: paths
-      }]
-    },
-    plugins: [
-      new ExtractTextPlugin('[name].[chunkhash:8].css')
-    ]
-  };
+	return {
+		module: {
+			rules: [{
+				test: /\.(css|scss)$/,
+				loader: ExtractTextPlugin.extract({
+					fallbackLoader: 'style-loader',
+					loader: [
+						{loader: 'css-loader', query: cssLoaderQuery},
+						{loader: 'sass-loader'}
+					]
+				}),
+				include: paths
+			}]
+		},
+		plugins: [
+			new ExtractTextPlugin('[name].[chunkhash:8].css')
+		]
+	};
 }
 
 exports.inlineCSSModules = function(path) {
-  return {
-    module: {
-      rules: [{
-        test: /\.(css|scss)$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader', query: cssLoaderQuery },
-          { loader: 'sass-loader' }
-        ],
-        include: path
-      }]
-    }
-  };
+	return {
+		module: {
+			rules: [{
+				test: /\.(css|scss)$/,
+				use: [
+					{ loader: 'style-loader' },
+					{ loader: 'css-loader', query: cssLoaderQuery },
+					{ loader: 'sass-loader' }
+				],
+				include: path
+			}]
+		}
+	};
 }
 
 exports.fileLoader = function() {
-  return {
-    module: {
-      rules: [{
-        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: [
-          {loader: "file-loader" }
-        ]}, {
-          test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-          use: [{
-            loader: 'url-loader',
-            query: {limit:10000, mimetype:'application/font-woff'}
-          }]
-        }
-      ]
-    }
-  }
+	return {
+		module: {
+			rules: [{
+				test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+				use: [
+					{loader: "file-loader" }
+				]}, {
+					test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+					use: [{
+						loader: 'url-loader',
+						query: {limit:10000, mimetype:'application/font-woff'}
+					}]
+				}
+			]
+		}
+	}
 }
 //-------------- production ---------------
 exports.minify = function() {
-  return {
-    plugins: [
-      new webpack.optimize.UglifyJsPlugin({
-        comments: false,
-        compress: {
-          warnings: false,
-          drop_console: false
-        },
-        mangle: true
-      })
-    ]
-  };
+	return {
+		plugins: [
+			new LodashModuleReplacementPlugin(),
+			new webpack.optimize.OccurrenceOrderPlugin,
+			new webpack.optimize.UglifyJsPlugin({
+				comments: false,
+				compress: {
+					warnings: false,
+					drop_console: false
+				},
+				mangle: true
+			})
+		]
+	};
 }
 
 exports.setFreeVariable = function(key, value) {
-  const env = {};
-  env[key] = JSON.stringify(value);
+	const env = {};
+	env[key] = JSON.stringify(value);
 
-  return {
-    plugins: [
-      new webpack.DefinePlugin(env)
-    ]
-  };
+	return {
+		plugins: [
+			new webpack.DefinePlugin(env)
+		]
+	};
 }
 
 exports.clean = function(path) {
-  return {
-    plugins: [
-      new CleanWebpackPlugin([path], {
-        root: process.cwd()
-      })
-    ]
-  };
+	return {
+		plugins: [
+			new CleanWebpackPlugin([path], {
+				root: process.cwd()
+			})
+		]
+	};
 }
 
 // --------------- tools ---------------
 exports.eslint = function(path) {
-  return {
-    module: {
-      rules: [
-        {
-          test: /\.(js|jsx)$/,
-          use: 'eslint-loader',
-          enforce: 'pre',
-          include: path
-        }
-      ]
-    }
-  }
+	return {
+		module: {
+			rules: [
+				{
+					test: /\.(js|jsx)$/,
+					use: 'eslint-loader',
+					enforce: 'pre',
+					include: path
+				}
+			]
+		}
+	}
 }
 
 
 // -------------- dev tools ---------------
 exports.devServer = function(options) {
-  return {
-    devServer: {
-      historyApiFallback: true,
-        stats: 'minimal',
-        hot: true,
-        inline: true,
-        host: options.host || '0.0.0.0',
-        port: options.port || 3000
-    },
-    plugins: [
-      new webpack.HotModuleReplacementPlugin({})
-    ]
-  }
+	return {
+		devServer: {
+			historyApiFallback: true,
+				stats: 'minimal',
+				hot: true,
+				inline: true,
+				host: options.host || '0.0.0.0',
+				port: options.port || 3000
+		},
+		plugins: [
+			new webpack.HotModuleReplacementPlugin({})
+		]
+	}
 }
 
 exports.progress = function() {
-  return {
-    plugins: [
-      new NyanProgressPlugin()
-    ]
-  }
+	return {
+		plugins: [
+			new NyanProgressPlugin()
+		]
+	}
+}
+
+exports.analyse = function() {
+	return {
+		plugins: [
+			new BundleAnalyzerPlugin()
+		]
+	}
 }
 

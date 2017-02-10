@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import { Button } from 'react-mdl';
+import Button from 'react-mdl/lib/Button';
 
 import css from './menu.css';
 

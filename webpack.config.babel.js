@@ -6,6 +6,8 @@ const merge = require('webpack-merge');
 const pkg = require('./package.json');
 const parts = require('./webpack/webpack.parts');
 
+const webpack = require('webpack');
+
 const cssLibraries = [
   path.join('react-mdl', 'extra', 'css', 'material.teal-amber.min.css'),
   path.join('font-awesome', 'css','font-awesome.min.css'),
@@ -21,7 +23,7 @@ const PATHS = {
   ],
 }
 
-console.log(PATHS)
+// console.log(PATHS)
 
 const COMMON = merge(
   {
@@ -33,6 +35,7 @@ const COMMON = merge(
       path: PATHS.build
     },
     resolve: {
+      //mainFields: ['jsnext:main', 'browser', 'main'],
       extensions: ['.js', '.jsx'],
       alias: {
         'react-redux-firebase': path.join(__dirname, 'node_modules', 'react-redux-firebase', 'dist', 'index.js')
@@ -43,10 +46,11 @@ const COMMON = merge(
   parts.setupFonts(),
   parts.setupBabel(PATHS.app));
 
+
+
 module.exports = function(env) {
   var nodeEnv = parts.setFreeVariable('process.env.NODE_ENV', env);
   process.env.BABEL_ENV = env;
-
 
   switch(env) {
     case 'production':
@@ -74,15 +78,16 @@ module.exports = function(env) {
         base,
         parts.clean(PATHS.build),
         nodeEnv,
-        parts.extractBundle({
-          name: 'vendor',
-          entries: libs,
-        }),
-        parts.minify(),
+				parts.extractVendor('vendor'),
+				// parts.extractBundle({
+				//    name: 'vendor',
+				//    entries: libs,
+				// }),
+        //parts.minify(),
         parts.eslint(PATHS.app),
         parts.extractCSSModules(PATHS.app),
         parts.extractCSS(PATHS.styles),
-        parts.htmlTemplate({title: 'Roll for Initiative'})
+        parts.htmlTemplate({title: 'Roll for Initiative'}),
       );
     case 'dev':
       return merge({ entry: { app: PATHS.styles } },

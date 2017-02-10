@@ -6,6 +6,8 @@ import {
   SIGN_OUT_SUCCESS,
 } from './action-types';
 
+import { displayError } from '../error/actions';
+
 export function logout() {
   return (dispatch, _, getFirebase) =>
     getFirebase().logout()
@@ -18,7 +20,7 @@ function authenticateWith(provider) {
       .then(() => dispatch(push('/')))
       .catch((err) => {
         const message = err.message || 'Unknown Error';
-        dispatch({ type: 'ERROR', payload: { message } });
+        dispatch(displayError(message));
       });
   };
 }
