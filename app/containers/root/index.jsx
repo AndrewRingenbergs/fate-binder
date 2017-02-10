@@ -4,8 +4,6 @@ import { firebaseConnect } from 'react-redux-firebase';
 
 import { List } from 'immutable';
 
-import { Layout, Header, Drawer, Content, Navigation } from 'react-mdl';
-
 import Tools from '../tools';
 import MenuItem from '../../components/menu/menuItem';
 import MenuTitle from '../../components/menu/menuTitle';
@@ -17,22 +15,13 @@ class RootComponent extends React.Component {
   render() {
     const { children, logoutAction, username, photo, ..._otherProps } = this.props;
     return (
-      <Layout fixedDrawer fixedHeader >
-        <Header title="Roll for Initiative" />
-        <Drawer id="drawer" title={<MenuTitle username={username} photo={photo} />}>
-          <Navigation>
-            <MenuItem title="Logout" action={logoutAction} />
-          </Navigation>
-        </Drawer>
-        <Content className="mdl-color--grey-100">
-          <div className="mdl-grid">
-            <div className="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
-              { children }
-            </div>
-          </div>
-          <Tools />
-        </Content>
-      </Layout>
+      <div>
+        <h1>Roll for Initiative</h1>
+        <MenuTitle username={username} photo={photo} />
+        <MenuItem title="Logout" action={logoutAction} />
+        { children }
+        <Tools />
+      </div>
     );
   }
 }

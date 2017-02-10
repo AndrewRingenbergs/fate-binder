@@ -9,7 +9,6 @@ const parts = require('./webpack/webpack.parts');
 const webpack = require('webpack');
 
 const cssLibraries = [
-  path.join('react-mdl', 'extra', 'css', 'material.teal-amber.min.css'),
   path.join('font-awesome', 'css','font-awesome.min.css'),
 ];
 
@@ -71,19 +70,13 @@ module.exports = function(env) {
       const libs = Object.keys(pkg.dependencies)
         .filter(p => base.resolve.alias[p] == undefined && p !== 'font-awesome' );
 
-      libs.push('react-mdl/extra/material')
-
       return merge({ entry: { app: PATHS.styles } },
         COMMON,
         base,
         parts.clean(PATHS.build),
         nodeEnv,
 				parts.extractVendor('vendor'),
-				// parts.extractBundle({
-				//    name: 'vendor',
-				//    entries: libs,
-				// }),
-        //parts.minify(),
+        parts.minify(),
         parts.eslint(PATHS.app),
         parts.extractCSSModules(PATHS.app),
         parts.extractCSS(PATHS.styles),
