@@ -94,7 +94,7 @@ function config(env) {
         nodeEnv,
         parts.progress(),
         parts.eslint(PATHS.app),
-        parts.inlineCSS(PATHS.app),
+        parts.inlineCSSModules(PATHS.app),
         parts.extractCSS([ ...PATHS.styles,  reactToolbox]),
         parts.htmlTemplate({
           title: 'Roll for Initiative - Dev Server',

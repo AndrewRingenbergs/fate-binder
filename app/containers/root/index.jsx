@@ -18,7 +18,7 @@ class RootComponent extends React.Component {
     const { children, logoutAction, username, photo, ..._otherProps } = this.props;
     return (
       <div>
-        <AppBar title={"Roll for Initiative"} />
+        <AppBar title="Roll for Initiative" />
         <MenuTitle username={username} photo={photo} />
         <MenuItem title="Logout" action={logoutAction} />
         { children }
