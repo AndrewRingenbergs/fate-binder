@@ -5,7 +5,9 @@ import { firebaseConnect } from 'react-redux-firebase';
 import { List } from 'immutable';
 
 import AppBar from 'react-toolbox/lib/app_bar';
+import { Layout, Panel, NavDrawer } from 'react-toolbox/lib/layout';
 
+import Measure from '../measure';
 import Tools from '../tools';
 import MenuItem from '../../components/menu/menuItem';
 import MenuTitle from '../../components/menu/menuTitle';
@@ -14,16 +16,36 @@ import MenuTitle from '../../components/menu/menuTitle';
 import { logout } from '../../reducers/auth/actions';
 
 class RootComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { drawerOpen: false };
+    this.toggleDrawer = this.toggleDrawer.bind(this);
+  }
+  toggleDrawer() {
+    this.setState({ drawerOpen: !this.state.drawerOpen });
+  }
   render() {
-    const { children, logoutAction, username, photo, ..._otherProps } = this.props;
+    const { children, logoutAction, username, photo, sizes, ..._otherProps } = this.props;
     return (
-      <div>
-        <AppBar title="Roll for Initiative" />
-        <MenuTitle username={username} photo={photo} />
-        <MenuItem title="Logout" action={logoutAction} />
-        { children }
-        <Tools />
-      </div>
+      <Layout>
+        <NavDrawer
+          active={this.state.drawerOpen}
+          onOverlayClick={this.toggleDrawer}
+          permanentAt="md"
+        >
+          <MenuTitle username={username} photo={photo} />
+          <MenuItem title="Logout" action={logoutAction} />
+        </NavDrawer>
+        <Panel>
+          <AppBar
+            leftIcon={sizes.md ? null : 'menu'}
+            title="Roll for Initiative"
+            onLeftIconClick={this.toggleDrawer}
+          />
+          {children}
+          <Tools />
+        </Panel>
+      </Layout>
     );
   }
 }
@@ -33,6 +55,7 @@ RootComponent.propTypes = {
   logoutAction: PropTypes.func,
   username: PropTypes.string,
   photo: PropTypes.string,
+  sizes: PropTypes.shape({ md: PropTypes.bool }),
 };
 
 const NO_OP = () => {};
@@ -42,6 +65,7 @@ RootComponent.defaultProps = {
   logoutAction: NO_OP,
   username: null,
   photo: null,
+  sizes: { md: false },
 };
 
 function mapStateToProps(state) {
@@ -52,5 +76,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { logoutAction: logout })(firebaseConnect()(RootComponent));
+const FirebaseComponent = firebaseConnect()(Measure()(RootComponent));
+
+export default connect(mapStateToProps, { logoutAction: logout })(FirebaseComponent);
 

@@ -19,6 +19,9 @@ exports.htmlTemplate = function(options) {
     template: HtmlWebpackTemplate,
     inject: false,
     appMountId: 'root',
+    links: [
+      "https://fonts.googleapis.com/icon?family=Material+Icons",
+    ],
     meta: [
       {name: "viewport" ,
         content: "width=device-width, initial-scale=1"}
@@ -122,7 +125,7 @@ exports.extractCSS = function(paths) {
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style-loader',
           loader: [
-            {loader: 'css-loader', query: cssLoaderQuery},
+            {loader: 'css-loader'},
             {
               loader: 'postcss-loader',
               options: {
@@ -155,6 +158,16 @@ exports.extractCSSModules = function(paths) {
           loader: [
             {loader: 'css-loader', query: cssLoaderQuery},
             {loader: 'sass-loader'},
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: function() {
+                  return [
+                    cssnext(),
+                  ]
+                }
+              }
+            },
           ]
         }),
         include: paths

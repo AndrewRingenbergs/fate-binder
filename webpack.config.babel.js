@@ -17,7 +17,6 @@ const PATHS = {
   build: path.join(__dirname, 'build'),
   styles: cssLibraries.map(l => path.join(__dirname, 'node_modules', l)),
   globalStyles: [
-    path.join(__dirname, 'app', 'styles', 'material-icons', 'index.scss'),
     path.join(__dirname, 'app', 'styles', 'index.scss'),
   ],
 }
@@ -95,7 +94,8 @@ function config(env) {
         parts.progress(),
         parts.eslint(PATHS.app),
         parts.inlineCSSModules(PATHS.app),
-        parts.extractCSS([ ...PATHS.styles,  reactToolbox]),
+        parts.extractCSSModules([reactToolbox]),
+        parts.extractCSS(PATHS.styles),
         parts.htmlTemplate({
           title: 'Roll for Initiative - Dev Server',
           devServer: 'http://localhost:3000'
