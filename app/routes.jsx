@@ -1,11 +1,12 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, Redirect } from 'react-router';
 
 import { UserAuthWrapper } from 'redux-auth-wrapper';
 
 import Root from './containers/root';
 import Login from './pages/login';
 import Home from './pages/home';
+import Demo from './pages/demo';
 
 export const UserIsAuthenticated = UserAuthWrapper({
   wrapperDisplayName: 'UserIsAuthenticated',
@@ -30,6 +31,9 @@ export default function routes() {
     <Route path="" component={Root}>
       <Route path="/login" component={UserIsNotAuthenticated(Login)} />
       <Route path="/" component={UserIsAuthenticated(Home)} />
+      <Route path="/demo" component={UserIsAuthenticated(Demo)} />
+
+      <Redirect from="*" to="/" />
     </Route>
   );
 }

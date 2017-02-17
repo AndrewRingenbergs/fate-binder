@@ -5,7 +5,7 @@
 @import './colours';
 @import "~react-toolbox/lib/colors";
 
-.page-title {
+:global .page-title {
 	text-align: center;
 }
 

@@ -10,6 +10,7 @@ import { Layout, Panel, NavDrawer } from 'react-toolbox/lib/layout';
 import Measure from '../measure';
 import Tools from '../tools';
 import MenuItem from '../../components/menu/menuItem';
+import MenuLink from '../../components/menu/menuLink';
 import MenuTitle from '../../components/menu/menuTitle';
 
 import drawerTheme from './drawer-dark-theme.scss';
@@ -37,6 +38,7 @@ class RootComponent extends React.Component {
           permanentAt="md"
         >
           <MenuTitle username={username} photo={photo} />
+          <MenuLink title="Demo" to="/demo" />
           <MenuItem title="Logout" action={logoutAction} />
         </NavDrawer>
         <Panel>

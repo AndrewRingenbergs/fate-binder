@@ -11,6 +11,10 @@
     color: var(--palette-blue-grey-500) !important;
   }
 }
+
+:global(.active) .button {
+  background: var(--palette-blue-grey-700);
+}
 /* .navButton { */
 /*   height: auto; */
 /*   text-transform: none; */

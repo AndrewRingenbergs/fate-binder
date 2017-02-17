@@ -23,7 +23,7 @@ export class LoginComponent extends React.Component {
         <h1 className={css.signInHeading}>Sign in</h1>
         {
           buttons.map(provider =>
-            <div className={css.buttonWrapper} >
+            <div key={`login-${provider.name}`} className={css.buttonWrapper} >
               <LoginButton
                 key={provider.name}
                 name={provider.name}
