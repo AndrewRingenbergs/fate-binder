@@ -3,6 +3,7 @@
  */
 
 @import './colours';
+@import "~react-toolbox/lib/colors";
 
 .page-title {
 	text-align: center;
@@ -24,4 +25,11 @@
 
 body {
   margin: 0px;
+  background-color: var(--palette-grey-50);
+}
+
+:global .content {
+  border-radius: 2px;
+  margin: 1rem;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }

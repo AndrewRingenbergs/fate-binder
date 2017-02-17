@@ -1,16 +1,18 @@
 import React from 'react';
 
+import Button from 'react-toolbox/lib/button';
+
 import css from './login.scss';
 
 class LoginButton extends React.Component {
   render() {
     return (
       <div key={this.props.name} >
-        <button className={css.loginButton} onClick={this.props.action}>
+        <Button className={css.loginButton} onClick={this.props.action} raised>
           <i className={`fa fa-4x fa-fw ${this.props.icon}`} />
           <br />
           Sign in
-        </button>
+        </Button>
       </div>);
   }
 }

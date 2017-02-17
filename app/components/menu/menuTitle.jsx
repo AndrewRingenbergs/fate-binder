@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 
+import Avatar from 'react-toolbox/lib/avatar';
+
 import css from './menu.css';
 
 export default class MenuTitle extends React.Component {
@@ -7,9 +9,7 @@ export default class MenuTitle extends React.Component {
     const { username, photo, ..._otherProps } = this.props;
     const user = username || 'Guest';
 
-    const avatar = photo ?
-      <img className={css.avatar} src={photo} alt={`${user} profile`} /> :
-      <div className={css.avatar}>{user.charAt(0)}</div>;
+    const avatar = <Avatar className={css.avatar} cover image={photo} title={user} />;
 
     return (
       <div className={css.menuTitleWrapper}>

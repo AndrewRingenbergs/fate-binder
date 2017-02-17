@@ -1,5 +1,9 @@
+@import "~bourbon-neat/app/assets/stylesheets/neat";
+@import "../../styles/sizes.scss";
+
 .sign-in-form {
   text-align: center;
+  @include outer-container;
 }
 
 .sign-in-error {
@@ -10,13 +14,24 @@
 
 .sign-in-heading {
   text-align: center;
+  @include span-columns(12);
 }
 
-.login-button {
-  width: 140px;
-  height: 100px;
-  text-align: center;
-  margin-right: auto;
-  margin-left: auto;
-  margin-bottom: 2em;
+.button-wrapper {
+  @include span-columns(12);
+  @include media($smTablet) {
+    @include span-columns(6);
+    @include omega();
+  }
+  @include media($md) {
+    @include span-columns(3);
+  }
+  .login-button {
+    width: 140px;
+    height: 100px;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 2em;
+  }
 }

@@ -49,6 +49,7 @@
     "jest": "^18.1.0",
     "jest-css-modules": "^1.1.0",
     "lodash-webpack-plugin": "^0.11.0",
+    "node-neat": "^1.7.2",
     "node-sass": "^4.3.0",
     "nyan-progress-webpack-plugin": "^1.1.4",
     "postcss-cssnext": "^2.9.0",
@@ -71,9 +72,11 @@
     "webpack-merge": "^2.4.0"
   },
   "dependencies": {
+    "bourbon-neat": "^1.8.0",
     "firebase": "^3.6.5",
     "font-awesome": "^4.7.0",
     "immutable": "^3.8.1",
+    "node-neat": "^1.7.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-lite": "^0.15.30",

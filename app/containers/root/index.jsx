@@ -12,6 +12,7 @@ import Tools from '../tools';
 import MenuItem from '../../components/menu/menuItem';
 import MenuTitle from '../../components/menu/menuTitle';
 
+import drawerTheme from './drawer-dark-theme.scss';
 
 import { logout } from '../../reducers/auth/actions';
 
@@ -29,6 +30,8 @@ class RootComponent extends React.Component {
     return (
       <Layout>
         <NavDrawer
+          id="drawer"
+          theme={drawerTheme}
           active={this.state.drawerOpen}
           onOverlayClick={this.toggleDrawer}
           permanentAt="md"
@@ -38,6 +41,7 @@ class RootComponent extends React.Component {
         </NavDrawer>
         <Panel>
           <AppBar
+            theme={drawerTheme}
             leftIcon={sizes.md ? null : 'menu'}
             title="Roll for Initiative"
             onLeftIconClick={this.toggleDrawer}

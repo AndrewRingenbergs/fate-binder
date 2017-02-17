@@ -1,33 +1,41 @@
-@import '../../styles/colours.scss';
+@import "~react-toolbox/lib/colors";
 
-.navButton {
-  height: auto;
-  text-transform: none;
+.button {
+  width: 100%;
+  font-weight: 600;
+  color: var(--palette-blue-grey-300) !important;
   text-align: left;
-  padding: 16px 40px;
-  line-height: 24px;
-  color: $mc-blue-grey-400;
-  &:hover {
-    background: $mc-amber-400;
-    color: $mc-blue-grey-800;
-  }
-  @media screen and (max-width: 1024px) {
-    padding: 16px 16px;
+
+  &.flat:hover:not([dispabled]){
+    background: var(--palette-amber-400) !important;
+    color: var(--palette-blue-grey-500) !important;
   }
 }
+/* .navButton { */
+/*   height: auto; */
+/*   text-transform: none; */
+/*   text-align: left; */
+/*   padding: 16px 40px; */
+/*   line-height: 24px; */
+/*   color: $mc-blue-grey-400; */
+/*   &:hover { */
+/*     background: $mc-amber-400; */
+/*     color: $mc-blue-grey-800; */
+/*   } */
+/*   @media screen and (max-width: 1024px) { */
+/*     padding: 16px 16px; */
+/*   } */
+/* } */
 
 .menuTitleWrapper {
   display: flex;
   height: 128px;
-  width: 240px - 32px;
-  background: $mc-blue-grey-900;
-  color: $mc-blue-grey-50;
-  font-size: 0.6em;
+  background: var(--palette-blue-grey-900);
+  color: var(--palette-blue-grey-50);
   line-height: 3em;
   font-weight: 100;
   padding: 16px;
   white-space: nowrap;
-
 }
 
 .menuTitle {
@@ -38,14 +46,5 @@
 }
 
 .avatar {
-  display: block;
-  border-radius: 50%;
-  background: $accent;
-  color: $mc-amber-100;
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 40px;
-  font-size: 1.5em;
+  background-color: var(--palette-amber-400);
 }

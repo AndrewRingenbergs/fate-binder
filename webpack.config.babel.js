@@ -48,6 +48,7 @@ function config(env) {
   var nodeEnv = parts.setFreeVariable('process.env.NODE_ENV', env);
   process.env.BABEL_ENV = env;
   const reactToolbox = path.join(__dirname, 'node_modules', 'react-toolbox');
+  var neatSassPaths = require('node-neat').includePaths;
 
   switch(env) {
     case 'production':
@@ -74,11 +75,12 @@ function config(env) {
         base,
         parts.clean(PATHS.build),
         nodeEnv,
-				parts.extractVendor('vendor'),
+        parts.extractVendor('vendor'),
         parts.minify(),
         parts.eslint(PATHS.app),
         parts.extractCSSModules(PATHS.app),
-        parts.extractCSS([ ...PATHS.styles,  reactToolbox]),
+        parts.extractCSSModules(reactToolbox),
+        parts.extractCSS([ ...PATHS.styles, neatSassPaths]),
         parts.htmlTemplate({title: 'Roll for Initiative'}),
       );
     case 'dev':
@@ -94,7 +96,7 @@ function config(env) {
         parts.progress(),
         parts.eslint(PATHS.app),
         parts.inlineCSSModules(PATHS.app),
-        parts.extractCSSModules([reactToolbox]),
+        parts.extractCSSModules([reactToolbox, neatSassPaths]),
         parts.extractCSS(PATHS.styles),
         parts.htmlTemplate({
           title: 'Roll for Initiative - Dev Server',

@@ -23,12 +23,15 @@ export class LoginComponent extends React.Component {
         <h1 className={css.signInHeading}>Sign in</h1>
         {
           buttons.map(provider =>
-            <LoginButton
-              key={provider.name}
-              name={provider.name}
-              icon={provider.icon}
-              action={provider.action}
-            />)
+            <div className={css.buttonWrapper} >
+              <LoginButton
+                key={provider.name}
+                name={provider.name}
+                icon={provider.icon}
+                action={provider.action}
+              />
+            </div>,
+          )
         }
       </div>
     );
