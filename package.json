@@ -56,6 +56,7 @@
     "postcss-cssnext": "^2.9.0",
     "postcss-loader": "^1.2.2",
     "purifycss-webpack-plugin": "^2.0.3",
+    "raw-loader": "^0.5.1",
     "react-addons-test-utils": "^15.4.2",
     "react-shallow-renderer": "^1.1.4",
     "react-test-renderer": "^15.4.2",
@@ -95,7 +96,8 @@
     "redux-persist-immutable": "^4.2.0",
     "redux-persist-transform-immutable": "^4.2.0",
     "redux-thunk": "^2.1.0",
-    "uuid": "^3.0.1"
+    "uuid": "^3.0.1",
+    "webpack-assets-manifest": "^0.6.1"
   },
   "jest": {
     "moduleNameMapper": {

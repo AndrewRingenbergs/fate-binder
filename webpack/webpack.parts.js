@@ -37,6 +37,13 @@ exports.htmlTemplate = function(options) {
     }
   };
 
+  if(options.manifest) {
+    pluginOptions.links.push({
+      rel: 'manifest',
+      href: '/manifest.json',
+    })
+  }
+
   if(options.devServer) {
     pluginOptions.devServer = options.devServer
   }
@@ -126,12 +133,14 @@ const cssLoaderQuery = {
   localIdentName: '[path][name]__[local]--[hash:base64:5]'
 }
 
+const extractCssPlugin = new ExtractTextPlugin('[name].[chunkhash:8].css')
+
 exports.extractCSS = function(paths) {
   return {
     module: {
       rules: [{
         test: /\.(css|scss|sass)$/,
-        loader: ExtractTextPlugin.extract({
+        loader: extractCssPlugin.extract({
           fallbackLoader: 'style-loader',
           loader: [
             {loader: 'css-loader'},
@@ -151,7 +160,7 @@ exports.extractCSS = function(paths) {
       }]
     },
     plugins: [
-      new ExtractTextPlugin('[name].[chunkhash:8].css')
+      extractCssPlugin
     ]
   }
 }
@@ -162,7 +171,7 @@ exports.extractCSSModules = function(paths) {
     module: {
       rules: [{
         test: /\.(css|scss|sass)$/,
-        loader: ExtractTextPlugin.extract({
+        loader: extractCssPlugin.extract({
           fallbackLoader: 'style-loader',
           loader: [
             {loader: 'css-loader', query: cssLoaderQuery},
@@ -183,7 +192,7 @@ exports.extractCSSModules = function(paths) {
       }]
     },
     plugins: [
-      new ExtractTextPlugin('[name].[chunkhash:8].css')
+      extractCssPlugin
     ]
   };
 }
@@ -201,6 +210,22 @@ exports.inlineCSSModules = function(path) {
         include: path
       }]
     }
+  };
+}
+
+exports.extractManifest = function(path) { 
+  const extractManifest = new ExtractTextPlugin('[name].json');
+  return {
+    module: {
+      rules: [{
+        test: /(manifest\.json)$/,
+        include: path,
+        loader: extractManifest.extract(['raw-loader']),
+      }]
+    },
+    plugins: [
+      extractManifest
+    ]
   };
 }
 

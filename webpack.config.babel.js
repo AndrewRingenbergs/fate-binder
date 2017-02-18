@@ -20,6 +20,7 @@ const PATHS = {
   toolboxTheme: reactToolboxTheme,
   styles: cssLibraries.map(l => path.join(__dirname, 'node_modules', l)),
   globalStyles: path.join(__dirname, 'app', 'styles', 'index.scss'),
+  manifest: path.join(__dirname, 'manifest.json'),
 }
 
 // console.log(PATHS)
@@ -71,8 +72,11 @@ function config(env) {
       const libs = Object.keys(pkg.dependencies)
         .filter(p => base.resolve.alias[p] == undefined && p !== 'font-awesome' );
 
-
-      return merge({ entry: { app: PATHS.styles } },
+      return merge({
+        entry: {
+          app: PATHS.styles,
+            manifest: PATHS.manifest,
+        }},
         COMMON,
         base,
         parts.clean(PATHS.build),
@@ -82,7 +86,8 @@ function config(env) {
         parts.eslint(PATHS.app),
         parts.extractCSS([ ...PATHS.styles, neatSassPaths, PATHS.toolboxTheme]),
         parts.extractCSSModules([PATHS.app, reactToolbox]),
-        parts.htmlTemplate({title: 'Roll for Initiative'}),
+        parts.extractManifest(PATHS.manifest),
+        parts.htmlTemplate({title: 'Roll for Initiative', manifest: true}),
       );
     case 'dev':
       return merge({ entry: { app: PATHS.styles } },
