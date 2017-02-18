@@ -25,7 +25,16 @@ exports.htmlTemplate = function(options) {
     meta: [
       {name: "viewport" ,
         content: "width=device-width, initial-scale=1"}
-    ]
+    ],
+    chunksSortMode: function (a, b) {  //reverse alphabetical order
+      if (a.names[0] > b.names[0]) {
+        return -1;
+      }
+      if (a.names[0] < b.names[0]) {
+        return 1;
+      }
+      return 0;
+    }
   };
 
   if(options.devServer) {

@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "webpack-dev-server --env dev",
+    "server": "npm run toolbox && webpack-dev-server --env dev",
     "start": "npm run server",
-    "build": "webpack --env production",
+    "build": "npm run toolbox && webpack --env production",
     "test": "jest --coverage",
     "test:watch": "jest --watch --notify",
-    "deploy:prod": "npm run build && firebase deploy -P default --token=${FIREBASE_TOKEN}"
+    "deploy:prod": "npm run build && firebase deploy -P default --token=${FIREBASE_TOKEN}",
+    "toolbox": "react-toolbox-themr"
   },
   "repository": {
     "type": "git",
@@ -78,6 +79,7 @@
     "immutable": "^3.8.1",
     "node-neat": "^1.7.2",
     "react": "^15.4.2",
+    "react-css-themr": "^2.0.0",
     "react-dom": "^15.4.2",
     "react-lite": "^0.15.30",
     "react-redux": "^5.0.2",
@@ -98,5 +100,14 @@
     "moduleNameMapper": {
       "^.+\\.(css|scss)$": "identity-obj-proxy"
     }
+  },
+  "reactToolbox": {
+    "customProperties": {
+      "color-accent": "var(--palette-amber-500)",
+      "color-accent-dark": "var(--palette-amber-700)",
+      "color-primary": "var(--palette-teal-500)",
+      "color-primary-dark": "var(--palette-teal-700)"
+    },
+    "output": "react-toolbox-theme"
   }
 }

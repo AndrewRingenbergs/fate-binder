@@ -4,10 +4,13 @@ import { Provider } from 'react-redux';
 
 import { browserHistory, Router } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+import { ThemeProvider } from 'react-css-themr';
 
 import App from './app';
 import configureStore from './store';
 import routes from './routes';
+
+import theme from '../react-toolbox-theme/theme';
 
 const store = configureStore(browserHistory);
 const syncedHistory = syncHistoryWithStore(browserHistory, store, {
@@ -28,10 +31,12 @@ function bindCheckAuth(redux) {
 
 render((
   <App store={store}>
-    <Provider history={syncedHistory} store={store}>
-      <Router history={browserHistory}>
-        { routes(bindCheckAuth(store)) }
-      </Router>
-    </Provider>
+    <ThemeProvider theme={theme} >
+      <Provider history={syncedHistory} store={store}>
+        <Router history={browserHistory}>
+          { routes(bindCheckAuth(store)) }
+        </Router>
+      </Provider>
+    </ThemeProvider>
   </App>
 ), document.getElementById('root'));

@@ -29,7 +29,7 @@ class RootComponent extends React.Component {
   render() {
     const { children, logoutAction, username, photo, sizes, ..._otherProps } = this.props;
     return (
-      <Layout>
+      <Layout style={{ height: '100vh' }}>
         <NavDrawer
           id="drawer"
           theme={drawerTheme}

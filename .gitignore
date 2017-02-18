@@ -2,6 +2,8 @@
 /build/
 /coverage/
 
+/react-toolbox-theme/
+
 npm-debug.log
 firebase-debug.log
 

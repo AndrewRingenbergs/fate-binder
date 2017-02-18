@@ -12,13 +12,14 @@ const cssLibraries = [
   path.join('font-awesome', 'css','font-awesome.min.css'),
 ];
 
+const reactToolboxTheme = path.join(__dirname, 'react-toolbox-theme', 'theme.css');
+
 const PATHS = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'build'),
+  toolboxTheme: reactToolboxTheme,
   styles: cssLibraries.map(l => path.join(__dirname, 'node_modules', l)),
-  globalStyles: [
-    path.join(__dirname, 'app', 'styles', 'index.scss'),
-  ],
+  globalStyles: path.join(__dirname, 'app', 'styles', 'index.scss'),
 }
 
 // console.log(PATHS)
@@ -26,7 +27,8 @@ const PATHS = {
 const COMMON = merge(
   {
     entry: {
-      app: [PATHS.app, ...PATHS.globalStyles],
+      app: [PATHS.app, PATHS.globalStyles],
+      toolbox: reactToolboxTheme,
     },
     output: {
       filename: '[name].js',
@@ -78,9 +80,8 @@ function config(env) {
         parts.extractVendor('vendor'),
         parts.minify(),
         parts.eslint(PATHS.app),
-        parts.extractCSSModules(PATHS.app),
-        parts.extractCSSModules(reactToolbox),
-        parts.extractCSS([ ...PATHS.styles, neatSassPaths]),
+        parts.extractCSS([ ...PATHS.styles, neatSassPaths, PATHS.toolboxTheme]),
+        parts.extractCSSModules([PATHS.app, reactToolbox]),
         parts.htmlTemplate({title: 'Roll for Initiative'}),
       );
     case 'dev':
@@ -94,10 +95,11 @@ function config(env) {
         },
         nodeEnv,
         parts.progress(),
+        parts.extractVendor('vendor'),
         parts.eslint(PATHS.app),
         parts.inlineCSSModules(PATHS.app),
-        parts.extractCSSModules([reactToolbox, neatSassPaths]),
-        parts.extractCSS(PATHS.styles),
+        parts.extractCSSModules([reactToolbox]),
+        parts.extractCSS([ ...PATHS.styles, PATHS.toolboxTheme, neatSassPaths]),
         parts.htmlTemplate({
           title: 'Roll for Initiative - Dev Server',
           devServer: 'http://localhost:3000'
