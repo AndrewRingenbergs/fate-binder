@@ -1,23 +1,8 @@
-$primary: #009688;
-$dark-primary: #00796B;
-$light-primary: #B2DFDB;
-:export { primary: $primary }
-:export { dark-primary: $dark-primary }
-:export { light-primary: $light-primary }
+@import "~react-toolbox/lib/colors";
 
-$accent: #FFC107;
-:export { accent: $accent }
-
-$text-inverse: #FFFFFF;
-:export { text-inverse: $text-inverse }
-
-$primary-text: #212121;
-$secondary-text: #757575;
-$divider: #BDBDBD;
-$divider-dark: #424242;
-:export { primary-text: $primary-text }
-:export { secondary-text: $secondary-text }
-:export { divider: $divider }
-
-$menu: #263238;
-:export { menu: $menu }
+:root {
+  --primary: var(--palette-teal-400);
+  --primary-dark: var(--palette-teal-700);
+  --accent: var(--palette-amber-a400);
+  --accent-dark: var(--palette-amber-a700);
+}

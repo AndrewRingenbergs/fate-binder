@@ -2,7 +2,6 @@
  * global styles
  */
 
-@import './colours';
 @import "~react-toolbox/lib/colors";
 
 :global .page-title {
@@ -18,7 +17,7 @@
 }
 
 :global #drawer {
-	background: $mc-blue-grey-800;
+	background: var(--palette-blue-grey-800);
 	border-right: none;
 	box-shadow: 2px 0px 2px 0 rgba(0,0,0,.14), 3px 0px 1px -2px rgba(0,0,0,.2), 1px 0px 5px 0 rgba(0,0,0,.12);
 }

@@ -103,9 +103,9 @@
   },
   "reactToolbox": {
     "customProperties": {
-      "color-accent": "var(--palette-amber-500)",
-      "color-accent-dark": "var(--palette-amber-700)",
-      "color-primary": "var(--palette-teal-500)",
+      "color-accent": "var(--palette-amber-a400)",
+      "color-accent-dark": "var(--palette-amber-a700)",
+      "color-primary": "var(--palette-teal-400)",
       "color-primary-dark": "var(--palette-teal-700)"
     },
     "output": "react-toolbox-theme"

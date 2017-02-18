@@ -1,4 +1,5 @@
 @import "~react-toolbox/lib/colors";
+@import '../../style-constants/colours.scss';
 
 .button {
   width: 100%;
@@ -6,8 +7,8 @@
   color: var(--palette-blue-grey-300) !important;
   text-align: left;
 
-  &.flat:hover:not([dispabled]){
-    background: var(--palette-amber-400) !important;
+  &.flat:hover:not([disabled]){
+    background: var(--accent) !important;
     color: var(--palette-blue-grey-500) !important;
   }
 }
@@ -50,5 +51,5 @@
 }
 
 .avatar {
-  background-color: var(--palette-amber-400);
+  background-color: var(--accent);
 }
