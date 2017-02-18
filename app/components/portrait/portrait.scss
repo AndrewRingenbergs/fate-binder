@@ -1,0 +1,37 @@
+@import '../../style-constants/colours.scss';
+
+.wrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+
+  .image {
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+  }
+
+  .name {
+    text-align: center;
+    color: white;
+    font-size: 0.75em;
+    background: rgb(0, 0, 0); /* fallback color */
+    background: rgba(0, 0, 0, 0.5);
+    padding: 4px;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .avatar {
+    background-color: var(--accent);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+}
+

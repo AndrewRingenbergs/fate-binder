@@ -208,16 +208,11 @@ exports.fileLoader = function() {
   return {
     module: {
       rules: [{
-        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        test: /\.(jpg|png)$/,
         use: [
-          {loader: "file-loader" }
-        ]}, {
-          test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-          use: [{
-            loader: 'url-loader',
-            query: {limit:10000, mimetype:'application/font-woff'}
-          }]
-        }
+          { loader: "file-loader" },
+          // { loader: "url-loader", query: { limit:15000 } }
+        ]}
       ]
     }
   }

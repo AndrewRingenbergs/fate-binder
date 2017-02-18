@@ -42,7 +42,7 @@ const COMMON = merge(
       }
     }
   },
-  //parts.fileLoader(),
+  parts.fileLoader(PATHS.app),
   parts.setupFonts(),
   parts.setupBabel(PATHS.app));
 
