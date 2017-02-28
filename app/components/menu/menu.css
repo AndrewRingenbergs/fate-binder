@@ -16,21 +16,6 @@
 :global(.active) .button {
   background: var(--palette-blue-grey-700);
 }
-/* .navButton { */
-/*   height: auto; */
-/*   text-transform: none; */
-/*   text-align: left; */
-/*   padding: 16px 40px; */
-/*   line-height: 24px; */
-/*   color: $mc-blue-grey-400; */
-/*   &:hover { */
-/*     background: $mc-amber-400; */
-/*     color: $mc-blue-grey-800; */
-/*   } */
-/*   @media screen and (max-width: 1024px) { */
-/*     padding: 16px 16px; */
-/*   } */
-/* } */
 
 .menuTitleWrapper {
   display: flex;

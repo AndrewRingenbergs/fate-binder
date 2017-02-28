@@ -12,15 +12,15 @@ function getDebugSessionKey() {
 
 export const middleware = [DevTools.instrument(), persistState(getDebugSessionKey())];
 
-export function postCreateStore(store) {
-  if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept('../reducers', () => {
-      /* eslint-disable global-require */
-      const nextReducer = require('../reducers/index').default;
-      /* eslint-enable global-require */
+export function postCreateStore() {
+  // if (module.hot) {
+  //   // Enable Webpack hot module replacement for reducers
+  //   module.hot.accept('../reducers', () => {
+  //     [> eslint-disable global-require <]
+  //     const nextReducer = require('../reducers/index').default;
+  //     [> eslint-enable global-require <]
 
-      store.replaceReducer(nextReducer);
-    });
-  }
+  //     store.replaceReducer(nextReducer);
+  //   });
+  // }
 }
