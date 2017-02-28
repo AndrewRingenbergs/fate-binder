@@ -16,7 +16,7 @@ export function logout() {
 
 function authenticateWith(provider) {
   return (dispatch, _, getFirebase) => {
-    getFirebase().login({ provider, type: 'popup' })
+    getFirebase().login({ provider, type: 'redirect' })
       .then(() => dispatch(push('/')))
       .catch((err) => {
         const message = err.message || 'Unknown Error';
