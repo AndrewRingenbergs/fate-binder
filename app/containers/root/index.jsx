@@ -34,6 +34,7 @@ class RootComponent extends React.Component {
         >
           <MenuTitle username={username} photo={photo} />
           <MenuLink title="Demo" to="/demo" action={this.props.closeDrawer} />
+          <MenuLink title="Fate" to="/fatecore" action={this.props.closeDrawer} />
           <MenuItem title="Logout" action={logoutAction} />
         </NavDrawer>
         <Panel>

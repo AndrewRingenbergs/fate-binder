@@ -9,7 +9,7 @@ class DemoComponent extends React.Component {
       photo: 'https://firebasestorage.googleapis.com/v0/b/roll-for-initiatve.appspot.com/o/demo-goblin.jpg?alt=media&token=1c8bb8ff-0004-4a76-93b1-8426dc3d0b42',
     };
     return (<div>
-      <h1 className="page-title">Demo</h1>
+      <h1 className="page-title">Fate Core</h1>
       <Portrait {... goblin} />
     </div>);
   }
