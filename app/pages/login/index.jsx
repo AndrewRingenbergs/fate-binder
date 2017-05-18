@@ -11,9 +11,9 @@ export class LoginComponent extends React.Component {
   render() {
     const buttons = [
       { name: 'Google', icon: 'fa-google', action: this.props.signInWithGoogle },
-      { name: 'Github', icon: 'fa-github', action: this.props.signInWithGithub },
-      { name: 'Facebook', icon: 'fa-facebook', action: this.props.signInWithFacebook },
-      { name: 'Twitter', icon: 'fa-twitter', action: this.props.signInWithTwitter },
+      //{ name: 'Github', icon: 'fa-github', action: this.props.signInWithGithub },
+      //{ name: 'Facebook', icon: 'fa-facebook', action: this.props.signInWithFacebook },
+      //{ name: 'Twitter', icon: 'fa-twitter', action: this.props.signInWithTwitter },
     ];
 
     const error = this.props.loginError;
@@ -39,10 +39,7 @@ export class LoginComponent extends React.Component {
 }
 
 LoginComponent.propTypes = {
-  signInWithGithub: React.PropTypes.func.isRequired,
   signInWithGoogle: React.PropTypes.func.isRequired,
-  signInWithFacebook: React.PropTypes.func.isRequired,
-  signInWithTwitter: React.PropTypes.func.isRequired,
   loginError: React.PropTypes.string,
 };
 

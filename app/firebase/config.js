@@ -1,8 +1,10 @@
 const prodConfig = {
-  apiKey: 'AIzaSyCFzZN_TYd1JGq2YAI5pdKJ7paanBUZxpY',
-  authDomain: 'roll-for-initiatve.firebaseapp.com',
-  databaseURL: 'https://roll-for-initiatve.firebaseio.com',
-  storageBucket: 'roll-for-initiatve.appspot.com',
+  apiKey: 'AIzaSyDiMn4AwNzczQXoPXuwWnnKhPeHgWHdY5Y',
+  authDomain: 'fate-binder.firebaseapp.com',
+  databaseURL: 'https://fate-binder.firebaseio.com',
+  projectId: 'fate-binder',
+  storageBucket: 'fate-binder.appspot.com',
+  messagingSenderId: '1060702126363',
 };
 
 // const devConfig = {
